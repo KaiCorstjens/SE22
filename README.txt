@@ -1,0 +1,1 @@
+Github repository voor de individuele opdracht van SE22.
