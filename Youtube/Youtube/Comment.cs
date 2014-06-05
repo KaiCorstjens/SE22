@@ -10,33 +10,36 @@ namespace Youtube
 
     public class Comment
     {
+        public int CommentID { get; private set; }
         // Can't/Shouldn't be changed afterwards, so private set (set in constructor)
         public Video Video { get; private set; }
         public string Text { get; set; }
         // Not according to class diagram, changed name from User to Poster, thought it makes more sense.
         public User Poster { get; set; }
         //Not according to class diagram, changed name from Date to PostedDate, thought it makes more sense.
-        public DateTime PostedDate { get; set; }
+        public string PostedDate { get; set; }
         public int Likes { get; set; }
         public Comment CommentOn { get; set; }
 
-        public Comment(Video video, string text, User poster)
+        public Comment(int commentID,Video video, string text, User poster)
         {
+            this.CommentID = commentID;
             this.Video = video;
             this.Text = text;
             this.Poster = poster;
             // If possible, change this to date/time on the server.
-            this.PostedDate = DateTime.Now;
+            this.PostedDate = DateTime.Now.ToShortDateString();
             this.Likes = 0;
         }
 
-        public Comment(Video video, string text, User poster, Comment commentOn)
+        public Comment(int commentID,Video video, string text, User poster, Comment commentOn)
         {
+            this.CommentID = commentID;
             this.Video = video;
             this.Text = text;
             this.Poster = poster;
             // If possible, change this to date/time on the server.
-            this.PostedDate = DateTime.Now;
+            this.PostedDate = DateTime.Now.ToShortDateString();
             this.Likes = 0;
             this.CommentOn = commentOn;
         }

@@ -5,5 +5,9 @@ Video: uploader from User to string
 TO DO:
 Delete comment S
 Delete video S
-Comments S
 Playlist C
+
+SQL Injection?
+Logout?
+
+

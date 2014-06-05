@@ -22,10 +22,8 @@
             <asp:Label ID="lblErrorMessages" runat="server" Font-Bold="True" Text="ErrorMessages" Visible="False"></asp:Label>
         <br />
         <div id="SearchResults">
-
             <asp:Panel ID="PnlSearchResults" runat="server">
             </asp:Panel>
-
         </div>
     </div>
     </form>

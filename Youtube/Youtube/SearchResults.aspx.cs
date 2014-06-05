@@ -57,6 +57,7 @@ namespace Youtube
                 myButton.Click += new EventHandler(BtnClicked);
                 PnlSearchResults.Controls.Add(myLabel);
                 PnlSearchResults.Controls.Add(myButton);
+                PnlSearchResults.Controls.Add(new LiteralControl("<br />"));
             }
         }
 

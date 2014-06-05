@@ -43,9 +43,12 @@
             <asp:Label ID="lblDescription" runat="server" Text="Description" Font-Bold="True" Font-Italic="True"></asp:Label>
             <br />
                 <div id="CommentArea">
-                    <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
-                    <asp:Button ID="Button1" runat="server" Text="Button" />
+                    <asp:TextBox ID="tbAddComment" runat="server" Visible="False"></asp:TextBox>
+                    <asp:Button ID="BtnAddComment" runat="server" Text="Reageer" OnClick="BtnAddComment_Click" Visible="False" />
+                    <asp:Label ID="lblCommentInfo" runat="server" Font-Italic="True" Font-Size="Small" Text="Je moet ingelogd zijn om reactie's te plaatsen"></asp:Label>
                     <br />
+                    <asp:Panel ID="PnlComments" runat="server">
+                    </asp:Panel>
                 </div>
             <br />
         </div>

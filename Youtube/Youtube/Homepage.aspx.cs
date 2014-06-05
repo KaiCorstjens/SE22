@@ -12,6 +12,7 @@ namespace Youtube
     using System.Web.UI.WebControls.WebParts;
     using System.Web.UI.HtmlControls; 
     using System.IO;
+    using System.Drawing;
 
     public partial class Homepage : System.Web.UI.Page
     {
@@ -19,6 +20,7 @@ namespace Youtube
         public List<Video> Videos {get; set;}
         public User CurrentUser { get; private set; }
         public Video CurrentVideo { get; private set; }
+        public List<Comment> Comments { get; private set; }
         private int currentVideoID;
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -71,6 +73,9 @@ namespace Youtube
             }
             HTMLVideo.Src = @"Video\"+filename;
             ChangeVideo(CurrentVideo);
+
+            Comments = databaseManager.GetComments(CurrentVideo);
+            AddComments();
             // HTMLVideo.Src = @"C:\SE22\KaiCorstjens\Videos\CurrentVideo4.mp4";
         }
         protected void BtnUpload_Click(object sender, EventArgs e)
@@ -126,6 +131,9 @@ namespace Youtube
                 tbPassword.Visible = false;
                 BtnLogIn.Visible = false;
                 BtnRegister.Visible = false;
+                tbAddComment.Visible = true;
+                BtnAddComment.Visible = true;
+                lblCommentInfo.Visible = false;
                 lblErrorMessages.Visible = true;
                 lblErrorMessages.ForeColor = System.Drawing.Color.Black;
                 lblErrorMessages.Text = "Succesvol ingelogd als "+loginUser.Username+".";
@@ -195,6 +203,36 @@ namespace Youtube
                 string search = tbSearchBar.Text.Replace(" ","+").ToLower();
                 string url = "SearchREsults.aspx?search="+search;
                 Response.Redirect(url);
+            }
+        }
+
+        protected void BtnAddComment_Click(object sender, EventArgs e)
+        {
+            if (tbAddComment.Text != string.Empty)
+            {
+                int commentID = Comments.Count() + 1;
+                Comment newcomment = new Comment(commentID,CurrentVideo, tbAddComment.Text, CurrentUser);
+                databaseManager.AddComment(CurrentVideo, newcomment);
+                AddComments();
+            }
+        }
+
+        public void AddComments()
+        {
+            PnlComments.Controls.Clear();
+            Comments = databaseManager.GetComments(CurrentVideo);
+            foreach (Comment c in Comments)
+            {
+                Label lblComment = new Label();
+                lblComment.Text = c.Text;
+                lblComment.ID = "CommentTxt" + c.CommentID;
+                Label lblCommentPoster = new Label();
+                lblCommentPoster.Text = " --  posted by " + c.Poster.Username;
+                lblCommentPoster.ID = "CommentPoster" + c.CommentID;
+                lblCommentPoster.Font.Size = FontUnit.Small;
+                PnlComments.Controls.Add(lblComment);
+                PnlComments.Controls.Add(lblCommentPoster);
+                PnlComments.Controls.Add(new LiteralControl("<br />"));
             }
         }
     }

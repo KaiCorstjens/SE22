@@ -78,7 +78,7 @@ namespace Youtube
             {
                 isPrivate = 0;
             }
-            string query = "INSERT INTO SE_VIDEO (VideoID,Titel,Uploader,Beschrijving,KeerBekeken,Datum,Likes,Dislikes,Prive,Categorie,Filename) VALUES ("+0+",'"+video.Title+"','"+video.Uploader+"','"+video.Description+"',"+0+","+video.UploadDate+","+0+","+0+","+isPrivate+",'"+string.Empty+"','"+video.Location+"')";
+            string query = "INSERT INTO SE_VIDEO (VideoID,Titel,Uploader,Beschrijving,KeerBekeken,Datum,Likes,Dislikes,Prive,Categorie,Filename) VALUES ("+video.VideoID+",'"+video.Title+"','"+video.Uploader+"','"+video.Description+"',"+0+","+video.UploadDate+","+0+","+0+","+isPrivate+",'"+string.Empty+"','"+video.Location+"')";
 
             OracleCommand command = new OracleCommand(query, connection);
             command.CommandType = CommandType.Text;
@@ -101,16 +101,14 @@ namespace Youtube
         {
             return true;
         }
-        // Not according to class diagram, changed Add_Comment to AddComment.
-        public bool AddComment(Comment comment)
-        {
-            return true;
-        }
 
         public List<Video> GetAllVideos()
         {
             List<Video> videoList = new List<Video>();
-            connection.Open();
+            if (connection.State != ConnectionState.Open)
+            {
+                connection.Open();
+            }
             string query = "SELECT * FROM SE_VIDEO";
             OracleCommand command = new OracleCommand(query, connection);
             command.CommandType = CommandType.Text;
@@ -165,7 +163,10 @@ namespace Youtube
 
         public bool VideoLike(Video video,bool likeDislike)
         {
-            connection.Open();
+            if (connection.State != ConnectionState.Open)
+            {
+                connection.Open();
+            }
             string query = string.Empty;
             int newlikes = video.Likes + 1;
             int newdislikes = video.DisLikes+ 1;
@@ -195,8 +196,10 @@ namespace Youtube
 
         public bool AddUser(User user)
         {
-            connection.Open();
-            // Oracle doesn't support bools, so change it into a number (0=false, 1=true).
+            if (connection.State != ConnectionState.Open)
+            {
+                connection.Open();
+            }
             string query = "INSERT INTO SE_GEBRUIKER (GEBRUIKERSNAAM,WACHTWOORD) VALUES ('"+user.Username+"','"+user.Password+"')";
 
             OracleCommand command = new OracleCommand(query, connection);
@@ -218,7 +221,10 @@ namespace Youtube
         public Video GetVideo (int videoID)
         {
             Video video = new Video(0, string.Empty, string.Empty, string.Empty, true, null, string.Empty);
-            connection.Open();
+            if (connection.State != ConnectionState.Open)
+            {
+                connection.Open();
+            }
             string query = "SELECT * FROM SE_VIDEO WHERE VIDEOID="+videoID;
             OracleCommand command = new OracleCommand(query, connection);
             command.CommandType = CommandType.Text;
@@ -268,6 +274,158 @@ namespace Youtube
             }
             connection.Close();
             return video;
+        }
+
+        public bool AddComment(Video video, Comment comment)
+        {
+            if (connection.State != ConnectionState.Open)
+            {
+                connection.Open();
+            }
+            string query = "INSERT INTO SE_REACTIE (REACTIEID,VIDEOID,TEKST,GEBRUIKERSNAAM,DATUM,LIKES) VALUES ('" + 0 + "','" + video.VideoID + "','" +comment.Text+"','"+comment.Poster.Username+"','"+comment.PostedDate+"','"+0+"')";
+
+            OracleCommand command = new OracleCommand(query, connection);
+            command.CommandType = CommandType.Text;
+
+            try
+            {
+                command.ExecuteNonQuery();
+            }
+            catch
+            {
+                return false;
+                // Catch if the command was not succesfully executed.
+            }
+            connection.Close();
+            return true;
+        }
+
+        public List<Comment> GetComments(Video video)
+        {
+            List<Comment> comments = new List<Comment>();
+            Comment comment;
+            if (connection.State != ConnectionState.Open)
+            {
+                connection.Open();
+            }
+            string query = "SELECT * FROM SE_REACTIE WHERE VIDEOID=" + video.VideoID;
+            OracleCommand command = new OracleCommand(query, connection);
+            command.CommandType = CommandType.Text;
+            OracleDataReader dataReader;
+            int commentID = 0;
+            string text = string.Empty;
+            string username = string.Empty;
+            User user;
+            int commentOnInt = 0;
+            Comment commentOn;
+            try
+            {
+                dataReader = command.ExecuteReader();
+                while (dataReader.Read())
+                {
+                    commentID = Convert.ToInt32(dataReader["REACTIEID"]);
+                    text = Convert.ToString(dataReader["TEKST"]);
+                    username = Convert.ToString(dataReader["GEBRUIKERSNAAM"]);
+                    user = GetUser(username);
+                    try
+                    {
+                        commentOnInt = Convert.ToInt32(dataReader["REACTIEOP"]);
+                        commentOn = GetComment(commentOnInt);
+                        comment = new Comment(commentID, video, text, user, commentOn);
+                    }
+                    catch
+                    {
+                        comment = new Comment(commentID, video, text, user);
+                    }
+                    comments.Add(comment);
+                }
+            }
+            catch
+            {
+                // Catch if reading from the database doesn't work
+            }
+            connection.Close();
+            return comments;
+        }
+
+        public User GetUser(string userName)
+        {
+            User user;
+            if (connection.State != ConnectionState.Open)
+            {
+                connection.Open();
+            }
+            string query = "SELECT * FROM SE_GEBRUIKER WHERE GEBRUIKERSNAAM='" + userName+"'";
+            OracleCommand command = new OracleCommand(query, connection);
+            command.CommandType = CommandType.Text;
+            OracleDataReader dataReader;
+            string username = string.Empty;
+            string password = string.Empty;
+            try
+            {
+                dataReader = command.ExecuteReader();
+                while (dataReader.Read())
+                {
+                    username = Convert.ToString(dataReader["GEBRUIKERSNAAM"]);
+                    password = Convert.ToString(dataReader["WACHTWOORD"]);
+                }
+            }
+            catch
+            {
+                // Catch if reading from the database doesn't work
+            }
+            user = new User(username, password);
+            connection.Close();
+            return user;
+        }
+
+        public Comment GetComment(int commentID)
+        {
+            Comment comment = new Comment(0, null, string.Empty, null);
+            if (connection.State != ConnectionState.Open)
+            {
+                connection.Open();
+            }
+            string query = "SELECT * FROM SE_REACTIE WHERE REACTIEID=" + commentID;
+            OracleCommand command = new OracleCommand(query, connection);
+            command.CommandType = CommandType.Text;
+            OracleDataReader dataReader; 
+            int commentIDInt = 0;
+            int videoID;
+            string text = string.Empty;
+            string username = string.Empty;
+            User user;
+            int commentOnInt = 0;
+            Comment commentOn;
+            try
+            {
+                dataReader = command.ExecuteReader();
+                while (dataReader.Read())
+                {
+                    commentIDInt = Convert.ToInt32(dataReader["REACTIEID"]);
+                    text = Convert.ToString(dataReader["TEKST"]);
+                    videoID = Convert.ToInt32(dataReader["VIDEOID"]);
+                    username = Convert.ToString(dataReader["GEBRUIKERSNAAM"]);
+                    user = GetUser(username);
+                    commentOnInt = Convert.ToInt32(dataReader["REACTIEOP"]);
+                    Video video = GetVideo(videoID);
+                    if (commentOnInt != 0 && commentOnInt != null)
+                    {
+                        commentOn = GetComment(commentOnInt);
+                        comment = new Comment(commentID, video, text, user, commentOn);
+                    }
+                    else
+                    {
+                        comment = new Comment(commentID, video, text, user);
+                    }
+                }
+            }
+            catch
+            {
+                // Catch if reading from the database doesn't work
+            }
+            connection.Close();
+            return comment;
         }
     }
 }
