@@ -19,6 +19,7 @@
             <asp:TextBox ID="tbPassword" runat="server" TextMode="Password"></asp:TextBox>
             <asp:Button ID="BtnLogIn" runat="server" OnClick="BtnLogIn_Click" Text="Log in" />
             <asp:Label ID="lblErrorMessages" runat="server" Font-Bold="True" Text="ErrorMessages" Visible="False"></asp:Label>
+            <asp:Button ID="BtnRegister" runat="server" OnClick="BtnRegister_Click" Text="Register" />
             <br />
                 <div id="videoPlayer">
                     <video id="HTMLVideo" runat="server" width="420" height="315" controls="controls">
@@ -27,13 +28,13 @@
                     </video>
                 </div>
             <br />
-            <asp:Label ID="lblTitle" runat="server" Text="Title"></asp:Label>
+            <asp:Label ID="lblTitle" runat="server" Text="Title" Font-Bold="True" Font-Size="X-Large"></asp:Label>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <asp:Label ID="lblViews" runat="server" Text="Views"></asp:Label>
             <br />
             &nbsp;&nbsp;<asp:Label ID="lblLikesDisLikes" runat="server" Text="Likes/Dislikes"></asp:Label>
 &nbsp;<asp:Button ID="BtnLikes" runat="server" Text="Likes" BackColor="#009933" OnClick="BtnLikes_Click" />
-            &nbsp;<asp:Button ID="BtnDislikes" runat="server" Text="Dislikes" BackColor="#FF3300" />
+            &nbsp;<asp:Button ID="BtnDislikes" runat="server" Text="Dislikes" BackColor="#FF3300" OnClick="BtnDislikes_Click" />
             <br />
             <asp:Label ID="lblDatePosted" runat="server" Text="DatePosted"></asp:Label>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

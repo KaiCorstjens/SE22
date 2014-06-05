@@ -162,5 +162,57 @@ namespace Youtube
             connection.Close();
             return videoList;
         }
+
+        public bool VideoLike(Video video,bool likeDislike)
+        {
+            connection.Open();
+            string query = "";
+            int newlikes = video.Likes + 1;
+            int newdislikes = video.DisLikes+ 1;
+            int videoId = video.VideoID;
+            if (likeDislike)
+            {
+                query = "UPDATE SE_VIDEO SET LIKES = '"+newlikes+"' WHERE VIDEOID=" + videoId;
+            }
+            else if (!likeDislike)
+            {
+                query = "UPDATE SE_VIDEO SET DISLIKES = '"+newdislikes+"' WHERE VIDEOID=" + videoId;
+            }
+
+            OracleCommand command = new OracleCommand(query, connection);
+            command.CommandType = CommandType.Text;
+            try
+            {
+                command.ExecuteNonQuery();
+            }
+            catch
+            {
+                return false;
+            }
+            connection.Close();
+            return true;
+        }
+
+        public bool AddUser(User user)
+        {
+            connection.Open();
+            // Oracle doesn't support bools, so change it into a number (0=false, 1=true).
+            string query = "INSERT INTO SE_GEBRUIKER (GEBRUIKERSNAAM,WACHTWOORD) VALUES ('"+user.Username+"','"+user.Password+"')";
+
+            OracleCommand command = new OracleCommand(query, connection);
+            command.CommandType = CommandType.Text;
+
+            try
+            {
+                command.ExecuteNonQuery();
+            }
+            catch
+            {
+                return false;
+                // Catch if the command was not succesfully executed.
+            }
+            connection.Close();
+            return true;
+        }
     }
 }
