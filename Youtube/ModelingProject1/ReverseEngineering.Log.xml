@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="file:///C:/PROGRAM FILES (X86)/MICROSOFT VISUAL STUDIO 12.0/COMMON7/IDE/EXTENSIONS/MICROSOFT/ARCHITECTURE TOOLS/EXTENSIBILITY/Logging/ReverseEngineeringLog.xslt"?>
+<Log xmlns="http://schemas.microsoft.com/VisualStudio/2010/CodeGen.RE.Log" Label="Code Generation/Text Transformation Log">
+  <MessageClass Name="Message" Label="Message" Option="Show informational messages" />
+  <MessageClass Name="Warning" Label="Warning" Option="Show warnings" />
+  <MessageClass Name="Error" Label="Error" Option="Show errors" />
+  <MessageClass Name="Property" Label="Property" Option="Show metadata" />
+  <MessageClass Name="Diagnostic" Label="Message" Option="Show diagnostic messages" />
+  <Message Timestamp="2014-06-05T13:13:41" Importance="High" Text="Reverse Engineering Started." />
+  <Message Timestamp="2014-06-05T13:13:44" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'a9455eb9-8bb7-4cfe-ae8b-742ab885f3f7' -  (ClassifierTemplateParameter)" />
+  <Message Timestamp="2014-06-05T13:13:44" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'Boolean' -  (PrimitiveType)" />
+  <Message Timestamp="2014-06-05T13:13:44" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'Integer' -  (PrimitiveType)" />
+  <Message Timestamp="2014-06-05T13:13:44" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'ModelingProject1::System' -  (Package)" />
+  <Message Timestamp="2014-06-05T13:13:44" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'ModelingProject1::System::Collections' -  (Package)" />
+  <Message Timestamp="2014-06-05T13:13:44" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'ModelingProject1::System::Collections::Generic' -  (Package)" />
+  <Message Timestamp="2014-06-05T13:13:44" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'ModelingProject1::System::Collections::Generic::List' -  (Class)   (partially reverse engineered - definition not updated) " />
+  <Message Timestamp="2014-06-05T13:13:44" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'ModelingProject1::System::Collections::Generic::List&lt;Comment‎&gt;' -  (Class)   (partially reverse engineered - definition not updated) " />
+  <Message Timestamp="2014-06-05T13:13:44" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'ModelingProject1::System::Collections::Generic::List&lt;Playlist‎&gt;' -  (Class)   (partially reverse engineered - definition not updated) " />
+  <Message Timestamp="2014-06-05T13:13:44" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'ModelingProject1::System::Collections::Generic::List&lt;Video‎&gt;' -  (Class)   (partially reverse engineered - definition not updated) " />
+  <Message Timestamp="2014-06-05T13:13:44" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'ModelingProject1::System::DateTime' -  (Class)   (partially reverse engineered - definition not updated) " />
+  <Message Timestamp="2014-06-05T13:13:44" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'ModelingProject1::System::EventArgs' -  (Class)   (partially reverse engineered - definition not updated) " />
+  <Message Timestamp="2014-06-05T13:13:44" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'ModelingProject1::System::Object' -  (Class)   (partially reverse engineered - definition not updated) " />
+  <Message Timestamp="2014-06-05T13:13:44" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'ModelingProject1::System::Web' -  (Package)" />
+  <Message Timestamp="2014-06-05T13:13:44" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'ModelingProject1::System::Web::UI' -  (Package)" />
+  <Message Timestamp="2014-06-05T13:13:44" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'ModelingProject1::System::Web::UI::HtmlControls' -  (Package)" />
+  <Message Timestamp="2014-06-05T13:13:44" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'ModelingProject1::System::Web::UI::HtmlControls::HtmlForm' -  (Class)   (partially reverse engineered - definition not updated) " />
+  <Message Timestamp="2014-06-05T13:13:44" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'ModelingProject1::System::Web::UI::Page' -  (Class)   (partially reverse engineered - definition not updated) " />
+  <Message Timestamp="2014-06-05T13:13:44" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'ModelingProject1::Youtube' -  (Package)" />
+  <Message Timestamp="2014-06-05T13:13:44" Importance="Medium" Text="Element reverse engineered into the UML model: 'ModelingProject1::Youtube::Comment' -  (Class)" />
+  <Message Timestamp="2014-06-05T13:13:44" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'ModelingProject1::Youtube::Comment::Comment' -  (Operation)" />
+  <Message Timestamp="2014-06-05T13:13:44" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'ModelingProject1::Youtube::Comment::Comment::commentOn' -  (Parameter)" />
+  <Message Timestamp="2014-06-05T13:13:44" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'ModelingProject1::Youtube::Comment::Comment::poster' -  (Parameter)" />
+  <Message Timestamp="2014-06-05T13:13:44" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'ModelingProject1::Youtube::Comment::Comment::text' -  (Parameter)" />
+  <Message Timestamp="2014-06-05T13:13:44" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'ModelingProject1::Youtube::Comment::Comment::video' -  (Parameter)" />
+  <Message Timestamp="2014-06-05T13:13:44" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'ModelingProject1::Youtube::Comment::CommentOn' -  (Property)" />
+  <Message Timestamp="2014-06-05T13:13:44" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'ModelingProject1::Youtube::Comment::Likes' -  (Property)" />
+  <Message Timestamp="2014-06-05T13:13:44" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'ModelingProject1::Youtube::Comment::NewComment' -  (Operation)" />
+  <Message Timestamp="2014-06-05T13:13:44" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'ModelingProject1::Youtube::Comment::NewComment::comment' -  (Parameter)" />
+  <Message Timestamp="2014-06-05T13:13:44" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'ModelingProject1::Youtube::Comment::NewComment::video' -  (Parameter)" />
+  <Message Timestamp="2014-06-05T13:13:44" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'ModelingProject1::Youtube::Comment::PostedDate' -  (Property)" />
+  <Message Timestamp="2014-06-05T13:13:44" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'ModelingProject1::Youtube::Comment::Poster' -  (Property)" />
+  <Message Timestamp="2014-06-05T13:13:44" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'ModelingProject1::Youtube::Comment::Text' -  (Property)" />
+  <Message Timestamp="2014-06-05T13:13:44" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'ModelingProject1::Youtube::Comment::Video' -  (Property)" />
+  <Message Timestamp="2014-06-05T13:13:44" Importance="Medium" Text="Element reverse engineered into the UML model: 'ModelingProject1::Youtube::DatabaseManager' -  (Class)" />
+  <Message Timestamp="2014-06-05T13:13:44" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'ModelingProject1::Youtube::DatabaseManager::AddComment' -  (Operation)" />
+  <Message Timestamp="2014-06-05T13:13:44" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'ModelingProject1::Youtube::DatabaseManager::AddComment::comment' -  (Parameter)" />
+  <Message Timestamp="2014-06-05T13:13:44" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'ModelingProject1::Youtube::DatabaseManager::AddPlaylist' -  (Operation)" />
+  <Message Timestamp="2014-06-05T13:13:44" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'ModelingProject1::Youtube::DatabaseManager::AddPlaylist::playlist' -  (Parameter)" />
+  <Message Timestamp="2014-06-05T13:13:44" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'ModelingProject1::Youtube::DatabaseManager::AddVideo' -  (Operation)" />
+  <Message Timestamp="2014-06-05T13:13:44" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'ModelingProject1::Youtube::DatabaseManager::AddVideo::video' -  (Parameter)" />
+  <Message Timestamp="2014-06-05T13:13:44" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'ModelingProject1::Youtube::DatabaseManager::Authenticate' -  (Operation)" />
+  <Message Timestamp="2014-06-05T13:13:44" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'ModelingProject1::Youtube::DatabaseManager::Authenticate::user' -  (Parameter)" />
+  <Message Timestamp="2014-06-05T13:13:44" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'ModelingProject1::Youtube::DatabaseManager::DatabaseManager' -  (Operation)" />
+  <Message Timestamp="2014-06-05T13:13:44" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'ModelingProject1::Youtube::DatabaseManager::domain' -  (Property)" />
+  <Message Timestamp="2014-06-05T13:13:44" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'ModelingProject1::Youtube::DatabaseManager::forest' -  (Property)" />
+  <Message Timestamp="2014-06-05T13:13:44" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'ModelingProject1::Youtube::DatabaseManager::password' -  (Property)" />
+  <Message Timestamp="2014-06-05T13:13:44" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'ModelingProject1::Youtube::DatabaseManager::Register' -  (Operation)" />
+  <Message Timestamp="2014-06-05T13:13:44" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'ModelingProject1::Youtube::DatabaseManager::Register::user' -  (Parameter)" />
+  <Message Timestamp="2014-06-05T13:13:44" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'ModelingProject1::Youtube::DatabaseManager::username' -  (Property)" />
+  <Message Timestamp="2014-06-05T13:13:44" Importance="Medium" Text="Element reverse engineered into the UML model: 'ModelingProject1::Youtube::Homepage' -  (Class)" />
+  <Message Timestamp="2014-06-05T13:13:44" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'ModelingProject1::Youtube::Homepage::form1' -  (Property)" />
+  <Message Timestamp="2014-06-05T13:13:44" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'ModelingProject1::Youtube::Homepage::Homepage' -  (Operation)" />
+  <Message Timestamp="2014-06-05T13:13:44" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'ModelingProject1::Youtube::Homepage::Page_Load' -  (Operation)" />
+  <Message Timestamp="2014-06-05T13:13:44" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'ModelingProject1::Youtube::Homepage::Page_Load::e' -  (Parameter)" />
+  <Message Timestamp="2014-06-05T13:13:44" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'ModelingProject1::Youtube::Homepage::Page_Load::sender' -  (Parameter)" />
+  <Message Timestamp="2014-06-05T13:13:44" Importance="Medium" Text="Element reverse engineered into the UML model: 'ModelingProject1::Youtube::Playlist' -  (Class)" />
+  <Message Timestamp="2014-06-05T13:13:44" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'ModelingProject1::Youtube::Playlist::AddVideo' -  (Operation)" />
+  <Message Timestamp="2014-06-05T13:13:44" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'ModelingProject1::Youtube::Playlist::AddVideo::video' -  (Parameter)" />
+  <Message Timestamp="2014-06-05T13:13:44" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'ModelingProject1::Youtube::Playlist::Playlist' -  (Operation)" />
+  <Message Timestamp="2014-06-05T13:13:44" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'ModelingProject1::Youtube::Playlist::Playlist::user' -  (Parameter)" />
+  <Message Timestamp="2014-06-05T13:13:44" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'ModelingProject1::Youtube::Playlist::User' -  (Property)" />
+  <Message Timestamp="2014-06-05T13:13:44" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'ModelingProject1::Youtube::Playlist::Videos' -  (Property)" />
+  <Message Timestamp="2014-06-05T13:13:44" Importance="Medium" Text="Element reverse engineered into the UML model: 'ModelingProject1::Youtube::User' -  (Class)" />
+  <Message Timestamp="2014-06-05T13:13:44" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'ModelingProject1::Youtube::User::Comments' -  (Property)" />
+  <Message Timestamp="2014-06-05T13:13:44" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'ModelingProject1::Youtube::User::Password' -  (Property)" />
+  <Message Timestamp="2014-06-05T13:13:44" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'ModelingProject1::Youtube::User::Playlists' -  (Property)" />
+  <Message Timestamp="2014-06-05T13:13:44" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'ModelingProject1::Youtube::User::User' -  (Operation)" />
+  <Message Timestamp="2014-06-05T13:13:44" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'ModelingProject1::Youtube::User::User::password' -  (Parameter)" />
+  <Message Timestamp="2014-06-05T13:13:44" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'ModelingProject1::Youtube::User::User::username' -  (Parameter)" />
+  <Message Timestamp="2014-06-05T13:13:44" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'ModelingProject1::Youtube::User::Username' -  (Property)" />
+  <Message Timestamp="2014-06-05T13:13:44" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'ModelingProject1::Youtube::User::Videos' -  (Property)" />
+  <Message Timestamp="2014-06-05T13:13:44" Importance="Medium" Text="Element reverse engineered into the UML model: 'ModelingProject1::Youtube::Video' -  (Class)" />
+  <Message Timestamp="2014-06-05T13:13:44" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'ModelingProject1::Youtube::Video::Comments' -  (Property)" />
+  <Message Timestamp="2014-06-05T13:13:44" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'ModelingProject1::Youtube::Video::Description' -  (Property)" />
+  <Message Timestamp="2014-06-05T13:13:44" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'ModelingProject1::Youtube::Video::DisLikes' -  (Property)" />
+  <Message Timestamp="2014-06-05T13:13:44" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'ModelingProject1::Youtube::Video::Likes' -  (Property)" />
+  <Message Timestamp="2014-06-05T13:13:44" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'ModelingProject1::Youtube::Video::Private' -  (Property)" />
+  <Message Timestamp="2014-06-05T13:13:44" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'ModelingProject1::Youtube::Video::Title' -  (Property)" />
+  <Message Timestamp="2014-06-05T13:13:44" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'ModelingProject1::Youtube::Video::UploadDate' -  (Property)" />
+  <Message Timestamp="2014-06-05T13:13:44" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'ModelingProject1::Youtube::Video::Uploader' -  (Property)" />
+  <Message Timestamp="2014-06-05T13:13:44" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'ModelingProject1::Youtube::Video::Video' -  (Operation)" />
+  <Message Timestamp="2014-06-05T13:13:44" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'ModelingProject1::Youtube::Video::Video::description' -  (Parameter)" />
+  <Message Timestamp="2014-06-05T13:13:44" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'ModelingProject1::Youtube::Video::Video::isPrivate' -  (Parameter)" />
+  <Message Timestamp="2014-06-05T13:13:44" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'ModelingProject1::Youtube::Video::Video::title' -  (Parameter)" />
+  <Message Timestamp="2014-06-05T13:13:44" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'ModelingProject1::Youtube::Video::Video::uploader' -  (Parameter)" />
+  <Message Timestamp="2014-06-05T13:13:44" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'ModelingProject1::Youtube::Video::Views' -  (Property)" />
+  <Message Timestamp="2014-06-05T13:13:44" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'String' -  (PrimitiveType)" />
+  <Message Timestamp="2014-06-05T13:13:44" Importance="Diagnostic" Text="Relationship reverse engineered into the UML model: ModelingProject1::Youtube::Playlist to ModelingProject1::Youtube::User (Association)" />
+  <Message Timestamp="2014-06-05T13:13:44" Importance="Diagnostic" Text="Relationship reverse engineered into the UML model: ModelingProject1::Youtube::Playlist to ModelingProject1::System::Collections::Generic::List&lt;Video‎&gt; (Association)" />
+  <Message Timestamp="2014-06-05T13:13:44" Importance="Diagnostic" Text="Relationship reverse engineered into the UML model: ModelingProject1::Youtube::User to ModelingProject1::System::Collections::Generic::List&lt;Comment‎&gt; (Association)" />
+  <Message Timestamp="2014-06-05T13:13:44" Importance="Diagnostic" Text="Relationship reverse engineered into the UML model: ModelingProject1::Youtube::User to ModelingProject1::System::Collections::Generic::List&lt;Playlist‎&gt; (Association)" />
+  <Message Timestamp="2014-06-05T13:13:44" Importance="Diagnostic" Text="Relationship reverse engineered into the UML model: ModelingProject1::Youtube::User to ModelingProject1::System::Collections::Generic::List&lt;Video‎&gt; (Association)" />
+  <Message Timestamp="2014-06-05T13:13:44" Importance="Diagnostic" Text="Relationship reverse engineered into the UML model: ModelingProject1::Youtube::Video to ModelingProject1::System::Collections::Generic::List&lt;Comment‎&gt; (Association)" />
+  <Message Timestamp="2014-06-05T13:13:44" Importance="Diagnostic" Text="Relationship reverse engineered into the UML model: ModelingProject1::Youtube::Video to ModelingProject1::System::DateTime (Association)" />
+  <Message Timestamp="2014-06-05T13:13:44" Importance="Diagnostic" Text="Relationship reverse engineered into the UML model: ModelingProject1::Youtube::Video to ModelingProject1::Youtube::User (Association)" />
+  <Message Timestamp="2014-06-05T13:13:44" Importance="Diagnostic" Text="Relationship reverse engineered into the UML model: ModelingProject1::Youtube::Comment to ModelingProject1::Youtube::Comment (Association)" />
+  <Message Timestamp="2014-06-05T13:13:44" Importance="Diagnostic" Text="Relationship reverse engineered into the UML model: ModelingProject1::Youtube::Comment to ModelingProject1::System::DateTime (Association)" />
+  <Message Timestamp="2014-06-05T13:13:44" Importance="Diagnostic" Text="Relationship reverse engineered into the UML model: ModelingProject1::Youtube::Comment to ModelingProject1::Youtube::User (Association)" />
+  <Message Timestamp="2014-06-05T13:13:44" Importance="Diagnostic" Text="Relationship reverse engineered into the UML model: ModelingProject1::Youtube::Comment to ModelingProject1::Youtube::Video (Association)" />
+  <Message Timestamp="2014-06-05T13:13:44" Importance="Diagnostic" Text="Relationship reverse engineered into the UML model: ModelingProject1::Youtube::Homepage to ModelingProject1::System::Web::UI::Page (Generalization)" />
+  <Message Timestamp="2014-06-05T13:13:44" Importance="High" Text="(6) type(s) fully reverse engineered." />
+  <Message Timestamp="2014-06-05T13:13:44" Importance="High" Text="(9) type(s) partially reverse engineered.  These types were not included in the original selection so their full definitions are not reverse engineered.  Instead, this shallow operation has simply ensured these types exist in the UML model because they are needed in order to fully describe other elements." />
+  <Message Timestamp="2014-06-05T13:13:44" Importance="High" Text="The reverse engineering operation completed with (0) error(s), and (0) warning(s)." />
+</Log>
