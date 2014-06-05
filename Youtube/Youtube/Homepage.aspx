@@ -10,7 +10,7 @@
     <form id="form1" runat="server">
         <div>
             <asp:TextBox ID="tbSearchBar" runat="server" Width="881px"></asp:TextBox>
-            <asp:Button ID="BtnSearch" runat="server" Text="Search" />
+            <asp:Button ID="BtnSearch" runat="server" Text="Search" OnClick="BtnSearch_Click" />
             <asp:Button ID="BtnUpload" runat="server" OnClick="BtnUpload_Click" Text="Upload" />
             <br />
             <asp:Label ID="lblUserloginName" runat="server" Text="Username"></asp:Label>
@@ -18,8 +18,8 @@
             <asp:Label ID="lblPassword" runat="server" Text="Password:"></asp:Label>
             <asp:TextBox ID="tbPassword" runat="server" TextMode="Password"></asp:TextBox>
             <asp:Button ID="BtnLogIn" runat="server" OnClick="BtnLogIn_Click" Text="Log in" />
-            <asp:Label ID="lblErrorMessages" runat="server" Font-Bold="True" Text="ErrorMessages" Visible="False"></asp:Label>
             <asp:Button ID="BtnRegister" runat="server" OnClick="BtnRegister_Click" Text="Register" />
+            <asp:Label ID="lblErrorMessages" runat="server" Font-Bold="True" Text="ErrorMessages" Visible="False"></asp:Label>
             <br />
                 <div id="videoPlayer">
                     <video id="HTMLVideo" runat="server" width="420" height="315" controls="controls">
@@ -41,6 +41,12 @@
             <asp:Label ID="lblUploaderName" runat="server" Text="Username" Font-Bold="True"></asp:Label>
             <br />
             <asp:Label ID="lblDescription" runat="server" Text="Description" Font-Bold="True" Font-Italic="True"></asp:Label>
+            <br />
+                <div id="CommentArea">
+                    <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
+                    <asp:Button ID="Button1" runat="server" Text="Button" />
+                    <br />
+                </div>
             <br />
         </div>
     </form>

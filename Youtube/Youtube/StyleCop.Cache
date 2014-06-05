@@ -152,11 +152,11 @@
       </violation>
     </violations>
   </sourcecode>
-  <sourcecode name="DatabaseManager.cs" parser="StyleCop.CSharp.CsParser">
+  <sourcecode name="Upload.aspx.cs" parser="StyleCop.CSharp.CsParser">
     <timestamps>
       <styleCop>2014-04-01 10:18:24.000</styleCop>
       <settingsFile>2014-06-05 16:12:51.522</settingsFile>
-      <sourceFile>2014-06-05 19:13:12.822</sourceFile>
+      <sourceFile>2014-06-05 19:18:19.812</sourceFile>
       <parser>2014-04-01 10:18:24.000</parser>
       <StyleCop.CSharp.DocumentationRules>2014-04-01 10:18:24.000</StyleCop.CSharp.DocumentationRules>
       <StyleCop.CSharp.DocumentationRules.FilesHashCode>-1834460950</StyleCop.CSharp.DocumentationRules.FilesHashCode>
@@ -179,30 +179,7 @@
     <timestamps>
       <styleCop>2014-04-01 10:18:24.000</styleCop>
       <settingsFile>2014-06-05 16:12:51.522</settingsFile>
-      <sourceFile>2014-06-05 19:13:04.089</sourceFile>
-      <parser>2014-04-01 10:18:24.000</parser>
-      <StyleCop.CSharp.DocumentationRules>2014-04-01 10:18:24.000</StyleCop.CSharp.DocumentationRules>
-      <StyleCop.CSharp.DocumentationRules.FilesHashCode>-1834460950</StyleCop.CSharp.DocumentationRules.FilesHashCode>
-      <StyleCop.CSharp.LayoutRules>2014-04-01 10:18:24.000</StyleCop.CSharp.LayoutRules>
-      <StyleCop.CSharp.LayoutRules.FilesHashCode>0</StyleCop.CSharp.LayoutRules.FilesHashCode>
-      <StyleCop.CSharp.MaintainabilityRules>2014-04-01 10:18:24.000</StyleCop.CSharp.MaintainabilityRules>
-      <StyleCop.CSharp.MaintainabilityRules.FilesHashCode>0</StyleCop.CSharp.MaintainabilityRules.FilesHashCode>
-      <StyleCop.CSharp.NamingRules>2014-04-01 10:18:24.000</StyleCop.CSharp.NamingRules>
-      <StyleCop.CSharp.NamingRules.FilesHashCode>0</StyleCop.CSharp.NamingRules.FilesHashCode>
-      <StyleCop.CSharp.OrderingRules>2014-04-01 10:18:24.000</StyleCop.CSharp.OrderingRules>
-      <StyleCop.CSharp.OrderingRules.FilesHashCode>0</StyleCop.CSharp.OrderingRules.FilesHashCode>
-      <StyleCop.CSharp.ReadabilityRules>2014-04-01 10:18:24.000</StyleCop.CSharp.ReadabilityRules>
-      <StyleCop.CSharp.ReadabilityRules.FilesHashCode>0</StyleCop.CSharp.ReadabilityRules.FilesHashCode>
-      <StyleCop.CSharp.SpacingRules>2014-04-01 10:18:24.000</StyleCop.CSharp.SpacingRules>
-      <StyleCop.CSharp.SpacingRules.FilesHashCode>0</StyleCop.CSharp.SpacingRules.FilesHashCode>
-    </timestamps>
-    <violations />
-  </sourcecode>
-  <sourcecode name="Homepage.aspx.cs" parser="StyleCop.CSharp.CsParser">
-    <timestamps>
-      <styleCop>2014-04-01 10:18:24.000</styleCop>
-      <settingsFile>2014-06-05 16:12:51.522</settingsFile>
-      <sourceFile>2014-06-05 19:17:56.487</sourceFile>
+      <sourceFile>2014-06-05 19:49:54.525</sourceFile>
       <parser>2014-04-01 10:18:24.000</parser>
       <StyleCop.CSharp.DocumentationRules>2014-04-01 10:18:24.000</StyleCop.CSharp.DocumentationRules>
       <StyleCop.CSharp.DocumentationRules.FilesHashCode>-1834460950</StyleCop.CSharp.DocumentationRules.FilesHashCode>
@@ -225,7 +202,76 @@
     <timestamps>
       <styleCop>2014-04-01 10:18:24.000</styleCop>
       <settingsFile>2014-06-05 16:12:51.522</settingsFile>
-      <sourceFile>2014-06-05 19:15:51.346</sourceFile>
+      <sourceFile>2014-06-05 20:21:02.462</sourceFile>
+      <parser>2014-04-01 10:18:24.000</parser>
+      <StyleCop.CSharp.DocumentationRules>2014-04-01 10:18:24.000</StyleCop.CSharp.DocumentationRules>
+      <StyleCop.CSharp.DocumentationRules.FilesHashCode>-1834460950</StyleCop.CSharp.DocumentationRules.FilesHashCode>
+      <StyleCop.CSharp.LayoutRules>2014-04-01 10:18:24.000</StyleCop.CSharp.LayoutRules>
+      <StyleCop.CSharp.LayoutRules.FilesHashCode>0</StyleCop.CSharp.LayoutRules.FilesHashCode>
+      <StyleCop.CSharp.MaintainabilityRules>2014-04-01 10:18:24.000</StyleCop.CSharp.MaintainabilityRules>
+      <StyleCop.CSharp.MaintainabilityRules.FilesHashCode>0</StyleCop.CSharp.MaintainabilityRules.FilesHashCode>
+      <StyleCop.CSharp.NamingRules>2014-04-01 10:18:24.000</StyleCop.CSharp.NamingRules>
+      <StyleCop.CSharp.NamingRules.FilesHashCode>0</StyleCop.CSharp.NamingRules.FilesHashCode>
+      <StyleCop.CSharp.OrderingRules>2014-04-01 10:18:24.000</StyleCop.CSharp.OrderingRules>
+      <StyleCop.CSharp.OrderingRules.FilesHashCode>0</StyleCop.CSharp.OrderingRules.FilesHashCode>
+      <StyleCop.CSharp.ReadabilityRules>2014-04-01 10:18:24.000</StyleCop.CSharp.ReadabilityRules>
+      <StyleCop.CSharp.ReadabilityRules.FilesHashCode>0</StyleCop.CSharp.ReadabilityRules.FilesHashCode>
+      <StyleCop.CSharp.SpacingRules>2014-04-01 10:18:24.000</StyleCop.CSharp.SpacingRules>
+      <StyleCop.CSharp.SpacingRules.FilesHashCode>0</StyleCop.CSharp.SpacingRules.FilesHashCode>
+    </timestamps>
+    <violations />
+  </sourcecode>
+  <sourcecode name="DatabaseManager.cs" parser="StyleCop.CSharp.CsParser">
+    <timestamps>
+      <styleCop>2014-04-01 10:18:24.000</styleCop>
+      <settingsFile>2014-06-05 16:12:51.522</settingsFile>
+      <sourceFile>2014-06-05 20:45:39.730</sourceFile>
+      <parser>2014-04-01 10:18:24.000</parser>
+      <StyleCop.CSharp.DocumentationRules>2014-04-01 10:18:24.000</StyleCop.CSharp.DocumentationRules>
+      <StyleCop.CSharp.DocumentationRules.FilesHashCode>-1834460950</StyleCop.CSharp.DocumentationRules.FilesHashCode>
+      <StyleCop.CSharp.LayoutRules>2014-04-01 10:18:24.000</StyleCop.CSharp.LayoutRules>
+      <StyleCop.CSharp.LayoutRules.FilesHashCode>0</StyleCop.CSharp.LayoutRules.FilesHashCode>
+      <StyleCop.CSharp.MaintainabilityRules>2014-04-01 10:18:24.000</StyleCop.CSharp.MaintainabilityRules>
+      <StyleCop.CSharp.MaintainabilityRules.FilesHashCode>0</StyleCop.CSharp.MaintainabilityRules.FilesHashCode>
+      <StyleCop.CSharp.NamingRules>2014-04-01 10:18:24.000</StyleCop.CSharp.NamingRules>
+      <StyleCop.CSharp.NamingRules.FilesHashCode>0</StyleCop.CSharp.NamingRules.FilesHashCode>
+      <StyleCop.CSharp.OrderingRules>2014-04-01 10:18:24.000</StyleCop.CSharp.OrderingRules>
+      <StyleCop.CSharp.OrderingRules.FilesHashCode>0</StyleCop.CSharp.OrderingRules.FilesHashCode>
+      <StyleCop.CSharp.ReadabilityRules>2014-04-01 10:18:24.000</StyleCop.CSharp.ReadabilityRules>
+      <StyleCop.CSharp.ReadabilityRules.FilesHashCode>0</StyleCop.CSharp.ReadabilityRules.FilesHashCode>
+      <StyleCop.CSharp.SpacingRules>2014-04-01 10:18:24.000</StyleCop.CSharp.SpacingRules>
+      <StyleCop.CSharp.SpacingRules.FilesHashCode>0</StyleCop.CSharp.SpacingRules.FilesHashCode>
+    </timestamps>
+    <violations />
+  </sourcecode>
+  <sourcecode name="Homepage.aspx.cs" parser="StyleCop.CSharp.CsParser">
+    <timestamps>
+      <styleCop>2014-04-01 10:18:24.000</styleCop>
+      <settingsFile>2014-06-05 16:12:51.522</settingsFile>
+      <sourceFile>2014-06-05 21:11:54.059</sourceFile>
+      <parser>2014-04-01 10:18:24.000</parser>
+      <StyleCop.CSharp.DocumentationRules>2014-04-01 10:18:24.000</StyleCop.CSharp.DocumentationRules>
+      <StyleCop.CSharp.DocumentationRules.FilesHashCode>-1834460950</StyleCop.CSharp.DocumentationRules.FilesHashCode>
+      <StyleCop.CSharp.LayoutRules>2014-04-01 10:18:24.000</StyleCop.CSharp.LayoutRules>
+      <StyleCop.CSharp.LayoutRules.FilesHashCode>0</StyleCop.CSharp.LayoutRules.FilesHashCode>
+      <StyleCop.CSharp.MaintainabilityRules>2014-04-01 10:18:24.000</StyleCop.CSharp.MaintainabilityRules>
+      <StyleCop.CSharp.MaintainabilityRules.FilesHashCode>0</StyleCop.CSharp.MaintainabilityRules.FilesHashCode>
+      <StyleCop.CSharp.NamingRules>2014-04-01 10:18:24.000</StyleCop.CSharp.NamingRules>
+      <StyleCop.CSharp.NamingRules.FilesHashCode>0</StyleCop.CSharp.NamingRules.FilesHashCode>
+      <StyleCop.CSharp.OrderingRules>2014-04-01 10:18:24.000</StyleCop.CSharp.OrderingRules>
+      <StyleCop.CSharp.OrderingRules.FilesHashCode>0</StyleCop.CSharp.OrderingRules.FilesHashCode>
+      <StyleCop.CSharp.ReadabilityRules>2014-04-01 10:18:24.000</StyleCop.CSharp.ReadabilityRules>
+      <StyleCop.CSharp.ReadabilityRules.FilesHashCode>0</StyleCop.CSharp.ReadabilityRules.FilesHashCode>
+      <StyleCop.CSharp.SpacingRules>2014-04-01 10:18:24.000</StyleCop.CSharp.SpacingRules>
+      <StyleCop.CSharp.SpacingRules.FilesHashCode>0</StyleCop.CSharp.SpacingRules.FilesHashCode>
+    </timestamps>
+    <violations />
+  </sourcecode>
+  <sourcecode name="SearchResults.aspx.designer.cs" parser="StyleCop.CSharp.CsParser">
+    <timestamps>
+      <styleCop>2014-04-01 10:18:24.000</styleCop>
+      <settingsFile>2014-06-05 16:12:51.522</settingsFile>
+      <sourceFile>2014-06-05 20:48:28.548</sourceFile>
       <parser>2014-04-01 10:18:24.000</parser>
       <StyleCop.CSharp.DocumentationRules>2014-04-01 10:18:24.000</StyleCop.CSharp.DocumentationRules>
       <StyleCop.CSharp.DocumentationRules.FilesHashCode>-1834460950</StyleCop.CSharp.DocumentationRules.FilesHashCode>
@@ -247,11 +293,11 @@
   <project key="-2112491568">
     <configuration>DEBUG;TRACE</configuration>
   </project>
-  <sourcecode name="Upload.aspx.cs" parser="StyleCop.CSharp.CsParser">
+  <sourcecode name="SearchResults.aspx.cs" parser="StyleCop.CSharp.CsParser">
     <timestamps>
       <styleCop>2014-04-01 10:18:24.000</styleCop>
       <settingsFile>2014-06-05 16:12:51.522</settingsFile>
-      <sourceFile>2014-06-05 19:18:19.812</sourceFile>
+      <sourceFile>2014-06-05 21:18:08.894</sourceFile>
       <parser>2014-04-01 10:18:24.000</parser>
       <StyleCop.CSharp.DocumentationRules>2014-04-01 10:18:24.000</StyleCop.CSharp.DocumentationRules>
       <StyleCop.CSharp.DocumentationRules.FilesHashCode>-1834460950</StyleCop.CSharp.DocumentationRules.FilesHashCode>

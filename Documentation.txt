@@ -1,0 +1,9 @@
+Added Filename Column to database in SE_VIDEO
+changed oracle date to varchar2 because oracle date is a pain in the ass.
+Video: uploader from User to string
+
+TO DO:
+Delete comment S
+Delete video S
+Comments S
+Playlist C

@@ -19,6 +19,7 @@ namespace Youtube
         public List<Video> Videos {get; set;}
         public User CurrentUser { get; private set; }
         public Video CurrentVideo { get; private set; }
+        private int currentVideoID;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (databaseManager == null)
@@ -32,27 +33,17 @@ namespace Youtube
             try
             {
                 CurrentUser = (User)Session["User"];
-                CurrentVideo = (Video)Session["Video"];
-
+                if(int.TryParse(Request.QueryString["video"],out currentVideoID))
+                {
+                    CurrentVideo = databaseManager.GetVideo(currentVideoID);
+                }
+                else
+                {
+                    CurrentVideo = databaseManager.GetVideo(1);
+                }
                 if (CurrentUser != null)
                 {
-                    if (databaseManager.Authenticate(CurrentUser))
-                    {
-                        lblUserloginName.Visible = false;
-                        lblPassword.Visible = false;
-                        tbLoginUsername.Visible = false;
-                        tbPassword.Visible = false;
-                        BtnLogIn.Visible = false;
-                        lblErrorMessages.Visible = true;
-                        lblErrorMessages.ForeColor = System.Drawing.Color.Black;
-                        lblErrorMessages.Text = "Succesvol ingelogd.";
-                    }
-                    else
-                    {
-                        lblErrorMessages.Visible = true;
-                        lblErrorMessages.ForeColor = System.Drawing.Color.Red;
-                        lblErrorMessages.Text = "Foute gebruikersnaam of wachtwoord in Session.";
-                    }
+                    Login(CurrentUser);
                 }
             }
             catch
@@ -101,7 +92,7 @@ namespace Youtube
         {
             if (tbLoginUsername.Text != string.Empty && tbPassword.Text != string.Empty)
             {
-                User loginUser = new User(tbLoginUsername.Text, tbPassword.Text);
+                User loginUser = new User(tbLoginUsername.Text.ToLower(), tbPassword.Text);
                 Login(loginUser);
             }
             else
@@ -177,7 +168,7 @@ namespace Youtube
         {
             if (tbLoginUsername.Text != string.Empty && tbPassword.Text != string.Empty)
             {
-                User newuser = new User(tbLoginUsername.Text, tbPassword.Text);
+                User newuser = new User(tbLoginUsername.Text.ToLower(), tbPassword.Text);
                 if (databaseManager.AddUser(newuser))
                 {
                     Login(newuser);
@@ -194,6 +185,16 @@ namespace Youtube
                 lblErrorMessages.Visible = true;
                 lblErrorMessages.ForeColor = System.Drawing.Color.Red;
                 lblErrorMessages.Text = "Gebruikersnaam of wachtwoord niet ingevuld.";
+            }
+        }
+
+        protected void BtnSearch_Click(object sender, EventArgs e)
+        {
+            if (tbSearchBar.Text != string.Empty)
+            {
+                string search = tbSearchBar.Text.Replace(" ","+").ToLower();
+                string url = "SearchREsults.aspx?search="+search;
+                Response.Redirect(url);
             }
         }
     }

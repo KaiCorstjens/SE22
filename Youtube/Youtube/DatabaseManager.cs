@@ -166,7 +166,7 @@ namespace Youtube
         public bool VideoLike(Video video,bool likeDislike)
         {
             connection.Open();
-            string query = "";
+            string query = string.Empty;
             int newlikes = video.Likes + 1;
             int newdislikes = video.DisLikes+ 1;
             int videoId = video.VideoID;
@@ -213,6 +213,61 @@ namespace Youtube
             }
             connection.Close();
             return true;
+        }
+
+        public Video GetVideo (int videoID)
+        {
+            Video video = new Video(0, string.Empty, string.Empty, string.Empty, true, null, string.Empty);
+            connection.Open();
+            string query = "SELECT * FROM SE_VIDEO WHERE VIDEOID="+videoID;
+            OracleCommand command = new OracleCommand(query, connection);
+            command.CommandType = CommandType.Text;
+            OracleDataReader dataReader;
+            int videoId = 0;
+            string title = string.Empty;
+            string uploader = string.Empty;
+            string description = string.Empty;
+            int views = 0;
+            string uploadDate = string.Empty;
+            int likes = 0;
+            int disLikes = 0;
+            int isPrivate = 0;
+            bool isPrivateBool = false;
+            List<Comment> comments = new List<Comment>();
+            string location = string.Empty;
+            try
+            {
+                dataReader = command.ExecuteReader();
+                while (dataReader.Read())
+                {
+                    videoId = Convert.ToInt32(dataReader["VIDEOID"]);
+                    title = Convert.ToString(dataReader["TITEL"]);
+                    uploader = Convert.ToString(dataReader["UPLOADER"]);
+                    description = Convert.ToString(dataReader["BESCHRIJVING"]);
+                    views = Convert.ToInt32(dataReader["KEERBEKEKEN"]);
+                    uploadDate = Convert.ToString(dataReader["DATUM"]);
+                    likes = Convert.ToInt32(dataReader["LIKES"]);
+                    disLikes = Convert.ToInt32(dataReader["DISLIKES"]);
+                    isPrivate = Convert.ToInt32(dataReader["PRIVE"]);
+                    //Comments
+                    location = Convert.ToString(dataReader["FILENAME"]);
+                    if (isPrivate == 1)
+                    {
+                        isPrivateBool = true;
+                    }
+                    else if (isPrivate == 0)
+                    {
+                        isPrivateBool = false;
+                    }
+                    video = new Video(videoId, title, uploader, description, views, likes, disLikes, isPrivateBool, location);
+                }
+            }
+            catch
+            {
+                // Catch if reading from the database doesn't work
+            }
+            connection.Close();
+            return video;
         }
     }
 }
