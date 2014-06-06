@@ -409,7 +409,7 @@ namespace Youtube
                     user = GetUser(username);
                     commentOnInt = Convert.ToInt32(dataReader["REACTIEOP"]);
                     Video video = GetVideo(videoID);
-                    if (commentOnInt != 0 && commentOnInt != null)
+                    if (commentOnInt != 0)
                     {
                         commentOn = GetComment(commentOnInt);
                         comment = new Comment(commentID, video, text, user, commentOn);
@@ -426,6 +426,30 @@ namespace Youtube
             }
             connection.Close();
             return comment;
+        }
+
+        public bool DeleteVideo(Video video)
+        {
+            if (connection.State != ConnectionState.Open)
+            {
+                connection.Open();
+            }
+            string query = "DELETE FROM SE_VIDEO WHERE VIDEOID='"+video.VideoID+"' ";
+
+            OracleCommand command = new OracleCommand(query, connection);
+            command.CommandType = CommandType.Text;
+
+            try
+            {
+                command.ExecuteNonQuery();
+            }
+            catch
+            {
+                return false;
+                // Catch if the command was not succesfully executed.
+            }
+            connection.Close();
+            return true;
         }
     }
 }

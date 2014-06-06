@@ -27,6 +27,7 @@
                         Your browser does not support the video tag.
                     </video>
                 </div>
+            <asp:Button ID="BtnDeleteVideo" runat="server" Text="Verwijder video" OnClick="BtnDeleteVideo_Click" Visible="False"/>
             <br />
             <asp:Label ID="lblTitle" runat="server" Text="Title" Font-Bold="True" Font-Size="X-Large"></asp:Label>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

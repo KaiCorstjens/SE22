@@ -30,18 +30,37 @@ namespace Youtube
             }
             if (Videos == null)
             {
-                Videos = new List<Video>();
+                Videos = databaseManager.GetAllVideos();
             }
             try
             {
-                CurrentUser = (User)Session["User"];
+                //CurrentUser = (User)Session["User"];
+                string username = (string)(Session["Username"]);
+                string password = (string)(Session["Password"]);
+                if (username != string.Empty && username != null && password != null && password != string.Empty)
+                {
+                    CurrentUser = new User(username, password);
+                }
                 if(int.TryParse(Request.QueryString["video"],out currentVideoID))
                 {
                     CurrentVideo = databaseManager.GetVideo(currentVideoID);
                 }
                 else
                 {
-                    CurrentVideo = databaseManager.GetVideo(1);
+                    if (Videos.Count != 0)
+                    {
+                        foreach (Video v in Videos)
+                        {
+                            if (CurrentVideo == null)
+                            {
+                                this.CurrentVideo = v;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        this.CurrentVideo = new Video(0, "Geen video's gevonden", null, string.Empty, false, null, string.Empty);
+                    }
                 }
                 if (CurrentUser != null)
                 {
@@ -52,17 +71,7 @@ namespace Youtube
             {
                 // No session found.
             }
-            Videos = databaseManager.GetAllVideos();
-            foreach (Video v in Videos)
-            {
-                if (v.VideoID == 1)
-                {
-                    if (CurrentVideo == null)
-                    {
-                        this.CurrentVideo = v;
-                    }
-                }
-            }
+            
             string path = Server.MapPath("/");
             int filenameBeginInt = CurrentVideo.Location.LastIndexOf(@"\");
             string filename = CurrentVideo.Location.Substring(filenameBeginInt);
@@ -76,6 +85,13 @@ namespace Youtube
 
             Comments = databaseManager.GetComments(CurrentVideo);
             AddComments();
+            if (CurrentVideo != null && CurrentUser != null)
+            {
+                if (CurrentVideo.Uploader == CurrentUser.Username)
+                {
+                    BtnDeleteVideo.Visible = true;
+                }
+            }
             // HTMLVideo.Src = @"C:\SE22\KaiCorstjens\Videos\CurrentVideo4.mp4";
         }
         protected void BtnUpload_Click(object sender, EventArgs e)
@@ -138,7 +154,13 @@ namespace Youtube
                 lblErrorMessages.ForeColor = System.Drawing.Color.Black;
                 lblErrorMessages.Text = "Succesvol ingelogd als "+loginUser.Username+".";
                 CurrentUser = loginUser;
-                Session["User"] = CurrentUser;
+                Session["Username"] = CurrentUser.Username;
+                Session["Password"] = CurrentUser.Password;
+                if (CurrentVideo.Uploader == CurrentUser.Username)
+                {
+                    BtnDeleteVideo.Visible = true;
+                }
+                //Session["User"] = CurrentUser;
             }
             else
             {
@@ -233,6 +255,29 @@ namespace Youtube
                 PnlComments.Controls.Add(lblComment);
                 PnlComments.Controls.Add(lblCommentPoster);
                 PnlComments.Controls.Add(new LiteralControl("<br />"));
+            }
+        }
+
+        protected void BtnDeleteVideo_Click(object sender, EventArgs e)
+        {
+            if (BtnDeleteVideo.Text == "Verwijder video")
+            {
+                BtnDeleteVideo.Text = "Weet je het zeker?";
+            }
+            else if (BtnDeleteVideo.Text == "Weet je het zeker?")
+            {
+                if (databaseManager.DeleteVideo(CurrentVideo))
+                {
+                    lblErrorMessages.Visible = true;
+                    lblErrorMessages.ForeColor = System.Drawing.Color.Black;
+                    lblErrorMessages.Text = "Video succesvol verwijderd";
+                }
+                else
+                {
+                    lblErrorMessages.Visible = true;
+                    lblErrorMessages.ForeColor = System.Drawing.Color.Red;
+                    lblErrorMessages.Text = "Video niet verwijderd";
+                }
             }
         }
     }
