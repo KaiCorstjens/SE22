@@ -91,39 +91,11 @@ namespace Youtube
                 {
                     BtnDeleteVideo.Visible = true;
                 }
+                AddComments();
             }
             // HTMLVideo.Src = @"C:\SE22\KaiCorstjens\Videos\CurrentVideo4.mp4";
         }
-        protected void BtnUpload_Click(object sender, EventArgs e)
-        {
-            if (CurrentUser != null)
-            {
-                string url = "Upload.aspx";
-                Response.Redirect(url);
-            }
-            else
-            {
-                lblErrorMessages.Visible = true;
-                lblErrorMessages.ForeColor = System.Drawing.Color.Red;
-                lblErrorMessages.Text = "Je moet ingelogd zijn om video's te uploaden.";
-            }
-        }
-
-        protected void BtnLogIn_Click(object sender, EventArgs e)
-        {
-            if (tbLoginUsername.Text != string.Empty && tbPassword.Text != string.Empty)
-            {
-                User loginUser = new User(tbLoginUsername.Text.ToLower(), tbPassword.Text);
-                Login(loginUser);
-            }
-            else
-            {
-                lblErrorMessages.Visible = true;
-                lblErrorMessages.ForeColor = System.Drawing.Color.Red;
-                lblErrorMessages.Text = "Gebruikersnaam of wachtwoord niet ingevuld.";
-            }
-        }
-
+       
         public void ChangeVideo(Video video)
         {
             Page.Title = CurrentVideo.Title;
@@ -160,6 +132,7 @@ namespace Youtube
                 {
                     BtnDeleteVideo.Visible = true;
                 }
+                AddComments();
                 //Session["User"] = CurrentUser;
             }
             else
@@ -169,7 +142,73 @@ namespace Youtube
                 lblErrorMessages.Text = "Foute gebruikersnaam of wachtwoord.";
             }
         }
-
+        public void AddComments()
+        {
+            PnlComments.Controls.Clear();
+            Comments = databaseManager.GetComments(CurrentVideo);
+            foreach (Comment c in Comments)
+            {
+                Label lblComment = new Label();
+                lblComment.Text = c.Text;
+                lblComment.ID = "CommentTxt" + c.CommentID;
+                Label lblCommentPoster = new Label();
+                lblCommentPoster.Text = " --  posted by " + c.Poster.Username;
+                lblCommentPoster.ID = "CommentPoster" + c.CommentID;
+                lblCommentPoster.Font.Size = FontUnit.Small;
+                Button btnDeleteComment = new Button();
+                btnDeleteComment.Text = "verwijder reactie";
+                btnDeleteComment.ID = "BtnDelete" + c.CommentID;
+                PnlComments.Controls.Add(lblComment);
+                PnlComments.Controls.Add(lblCommentPoster);
+                btnDeleteComment.Click += new EventHandler(DeleteComment);
+                if (CurrentUser != null && c != null)
+                {
+                    if (CurrentUser.Username == c.Poster.Username)
+                    {
+                        PnlComments.Controls.Add(btnDeleteComment);
+                    }
+                }
+                PnlComments.Controls.Add(new LiteralControl("<br />"));
+            }
+        }
+        protected void DeleteComment(object sender, EventArgs e)
+        {
+            int commentID = 0;
+            Button clickedButton = (Button)sender;
+            if (int.TryParse(clickedButton.ID.Substring(9), out commentID))
+            {
+                databaseManager.DeleteComment(commentID);
+            }
+            AddComments();
+        }
+        protected void BtnLogIn_Click(object sender, EventArgs e)
+        {
+            if (tbLoginUsername.Text != string.Empty && tbPassword.Text != string.Empty)
+            {
+                User loginUser = new User(tbLoginUsername.Text.ToLower(), tbPassword.Text);
+                Login(loginUser);
+            }
+            else
+            {
+                lblErrorMessages.Visible = true;
+                lblErrorMessages.ForeColor = System.Drawing.Color.Red;
+                lblErrorMessages.Text = "Gebruikersnaam of wachtwoord niet ingevuld.";
+            }
+        }
+        protected void BtnUpload_Click(object sender, EventArgs e)
+        {
+            if (CurrentUser != null)
+            {
+                string url = "Upload.aspx";
+                Response.Redirect(url);
+            }
+            else
+            {
+                lblErrorMessages.Visible = true;
+                lblErrorMessages.ForeColor = System.Drawing.Color.Red;
+                lblErrorMessages.Text = "Je moet ingelogd zijn om video's te uploaden.";
+            }
+        }
         protected void BtnLikes_Click(object sender, EventArgs e)
         {
             CurrentVideo.LikeVideo(true);
@@ -181,7 +220,6 @@ namespace Youtube
                 lblErrorMessages.Text = "Like niet toegevoegd, fout in de verbinding.";
             }
         }
-
         protected void BtnDislikes_Click(object sender, EventArgs e)
         {
             CurrentVideo.LikeVideo(false);
@@ -193,7 +231,6 @@ namespace Youtube
                 lblErrorMessages.Text = "Dislike niet toegevoegd, fout in de verbinding.";
             }
         }
-
         protected void BtnRegister_Click(object sender, EventArgs e)
         {
             if (tbLoginUsername.Text != string.Empty && tbPassword.Text != string.Empty)
@@ -217,7 +254,6 @@ namespace Youtube
                 lblErrorMessages.Text = "Gebruikersnaam of wachtwoord niet ingevuld.";
             }
         }
-
         protected void BtnSearch_Click(object sender, EventArgs e)
         {
             if (tbSearchBar.Text != string.Empty)
@@ -227,37 +263,24 @@ namespace Youtube
                 Response.Redirect(url);
             }
         }
-
         protected void BtnAddComment_Click(object sender, EventArgs e)
         {
             if (tbAddComment.Text != string.Empty)
             {
-                int commentID = Comments.Count() + 1;
-                Comment newcomment = new Comment(commentID,CurrentVideo, tbAddComment.Text, CurrentUser);
+               // int commentID = Comments.Count() + 1;
+                int highestCommentID = 0;
+                foreach (Comment c in Comments)
+                {
+                    if (c.CommentID > highestCommentID)
+                    {
+                        highestCommentID = c.CommentID +1;
+                    }
+                }
+                Comment newcomment = new Comment(highestCommentID,CurrentVideo, tbAddComment.Text, CurrentUser);
                 databaseManager.AddComment(CurrentVideo, newcomment);
                 AddComments();
             }
         }
-
-        public void AddComments()
-        {
-            PnlComments.Controls.Clear();
-            Comments = databaseManager.GetComments(CurrentVideo);
-            foreach (Comment c in Comments)
-            {
-                Label lblComment = new Label();
-                lblComment.Text = c.Text;
-                lblComment.ID = "CommentTxt" + c.CommentID;
-                Label lblCommentPoster = new Label();
-                lblCommentPoster.Text = " --  posted by " + c.Poster.Username;
-                lblCommentPoster.ID = "CommentPoster" + c.CommentID;
-                lblCommentPoster.Font.Size = FontUnit.Small;
-                PnlComments.Controls.Add(lblComment);
-                PnlComments.Controls.Add(lblCommentPoster);
-                PnlComments.Controls.Add(new LiteralControl("<br />"));
-            }
-        }
-
         protected void BtnDeleteVideo_Click(object sender, EventArgs e)
         {
             if (BtnDeleteVideo.Text == "Verwijder video")

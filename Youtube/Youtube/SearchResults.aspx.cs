@@ -60,7 +60,30 @@ namespace Youtube
                 PnlSearchResults.Controls.Add(new LiteralControl("<br />"));
             }
         }
-
+        public void Login(User loginUser)
+        {
+            lblErrorMessages.Visible = true;
+            if (databaseManager.Authenticate(loginUser))
+            {
+                lblUserloginName.Visible = false;
+                lblPassword.Visible = false;
+                tbLoginUsername.Visible = false;
+                tbPassword.Visible = false;
+                BtnLogIn.Visible = false;
+                BtnRegister.Visible = false;
+                lblErrorMessages.Visible = true;
+                lblErrorMessages.ForeColor = System.Drawing.Color.Black;
+                lblErrorMessages.Text = "Succesvol ingelogd als " + loginUser.Username + ".";
+                currentUser = loginUser;
+                Session["User"] = currentUser;
+            }
+            else
+            {
+                lblErrorMessages.Visible = true;
+                lblErrorMessages.ForeColor = System.Drawing.Color.Red;
+                lblErrorMessages.Text = "Foute gebruikersnaam of wachtwoord.";
+            }
+        }
         protected void BtnClicked(object sender,EventArgs e)
         {
             int videoID = 0;
@@ -100,32 +123,6 @@ namespace Youtube
                 lblErrorMessages.Text = "Gebruikersnaam of wachtwoord niet ingevuld.";
             }
         }
-
-        public void Login(User loginUser)
-        {
-            lblErrorMessages.Visible = true;
-            if (databaseManager.Authenticate(loginUser))
-            {
-                lblUserloginName.Visible = false;
-                lblPassword.Visible = false;
-                tbLoginUsername.Visible = false;
-                tbPassword.Visible = false;
-                BtnLogIn.Visible = false;
-                BtnRegister.Visible = false;
-                lblErrorMessages.Visible = true;
-                lblErrorMessages.ForeColor = System.Drawing.Color.Black;
-                lblErrorMessages.Text = "Succesvol ingelogd als " + loginUser.Username + ".";
-                currentUser = loginUser;
-                Session["User"] = currentUser;
-            }
-            else
-            {
-                lblErrorMessages.Visible = true;
-                lblErrorMessages.ForeColor = System.Drawing.Color.Red;
-                lblErrorMessages.Text = "Foute gebruikersnaam of wachtwoord.";
-            }
-        }
-
         protected void BtnRegister_Click(object sender, EventArgs e)
         {
             if (tbLoginUsername.Text != string.Empty && tbPassword.Text != string.Empty)
@@ -149,7 +146,6 @@ namespace Youtube
                 lblErrorMessages.Text = "Gebruikersnaam of wachtwoord niet ingevuld.";
             }
         }
-
         protected void BtnSearch_Click(object sender, EventArgs e)
         {
             if (tbSearchBar.Text != string.Empty)

@@ -37,7 +37,14 @@ namespace Youtube
                 string newFileLocation;
                 int videoID = 0;
                 List<Video> videoList = databaseManager.GetAllVideos();
-                videoID = videoList.Count() + 1;
+                int highestVideoID = 0;
+                foreach (Video v in videoList)
+                {
+                    if (v.VideoID > highestVideoID)
+                    {
+                        highestVideoID = v.VideoID + 1;
+                    }
+                }
                 // Check if file already exists. If it exists, add a number to it.
                 if (!Directory.Exists(uploadFolder))
                 {

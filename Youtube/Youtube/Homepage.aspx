@@ -18,7 +18,7 @@
             <asp:Label ID="lblPassword" runat="server" Text="Password:"></asp:Label>
             <asp:TextBox ID="tbPassword" runat="server" TextMode="Password"></asp:TextBox>
             <asp:Button ID="BtnLogIn" runat="server" OnClick="BtnLogIn_Click" Text="Log in" />
-            <asp:Button ID="BtnRegister" runat="server" OnClick="BtnRegister_Click" Text="Register" />
+            <asp:Button ID="BtnRegister" runat="server" OnClick="BtnRegister_Click" Text="Register" style="width: 70px" />
             <asp:Label ID="lblErrorMessages" runat="server" Font-Bold="True" Text="ErrorMessages" Visible="False"></asp:Label>
             <br />
                 <div id="videoPlayer">

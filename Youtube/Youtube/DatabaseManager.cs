@@ -59,11 +59,6 @@ namespace Youtube
                 return false;
             }
         }
-
-        public bool Register(User user)
-        {
-            return true;
-        }
         // Not according to class diagram, changed Add_Video to AddVideo.
         public bool AddVideo(Video video)
         {
@@ -101,7 +96,6 @@ namespace Youtube
         {
             return true;
         }
-
         public List<Video> GetAllVideos()
         {
             List<Video> videoList = new List<Video>();
@@ -160,7 +154,6 @@ namespace Youtube
             connection.Close();
             return videoList;
         }
-
         public bool VideoLike(Video video,bool likeDislike)
         {
             if (connection.State != ConnectionState.Open)
@@ -193,7 +186,6 @@ namespace Youtube
             connection.Close();
             return true;
         }
-
         public bool AddUser(User user)
         {
             if (connection.State != ConnectionState.Open)
@@ -217,7 +209,6 @@ namespace Youtube
             connection.Close();
             return true;
         }
-
         public Video GetVideo (int videoID)
         {
             Video video = new Video(0, string.Empty, string.Empty, string.Empty, true, null, string.Empty);
@@ -275,15 +266,16 @@ namespace Youtube
             connection.Close();
             return video;
         }
-
         public bool AddComment(Video video, Comment comment)
         {
+            //List<Comment> comments = GetComments(video);
+            //int commentID = comments.Count() + 1;
+            string query = "INSERT INTO SE_REACTIE (REACTIEID,VIDEOID,TEKST,GEBRUIKERSNAAM,DATUM,LIKES) VALUES ('" + comment.CommentID + "','" + video.VideoID + "','" +comment.Text+"','"+comment.Poster.Username+"','"+comment.PostedDate+"','"+0+"')";
+            // Located lower than usual, because GetComments(video) would close the connection.
             if (connection.State != ConnectionState.Open)
             {
                 connection.Open();
             }
-            string query = "INSERT INTO SE_REACTIE (REACTIEID,VIDEOID,TEKST,GEBRUIKERSNAAM,DATUM,LIKES) VALUES ('" + 0 + "','" + video.VideoID + "','" +comment.Text+"','"+comment.Poster.Username+"','"+comment.PostedDate+"','"+0+"')";
-
             OracleCommand command = new OracleCommand(query, connection);
             command.CommandType = CommandType.Text;
 
@@ -299,7 +291,6 @@ namespace Youtube
             connection.Close();
             return true;
         }
-
         public List<Comment> GetComments(Video video)
         {
             List<Comment> comments = new List<Comment>();
@@ -327,6 +318,11 @@ namespace Youtube
                     text = Convert.ToString(dataReader["TEKST"]);
                     username = Convert.ToString(dataReader["GEBRUIKERSNAAM"]);
                     user = GetUser(username);
+                    // GetUser(username) will close the connection, so open it again.
+                    if (connection.State != ConnectionState.Open)
+                    {
+                        connection.Open();
+                    }
                     try
                     {
                         commentOnInt = Convert.ToInt32(dataReader["REACTIEOP"]);
@@ -375,7 +371,7 @@ namespace Youtube
                 // Catch if reading from the database doesn't work
             }
             user = new User(username, password);
-            connection.Close();
+            // GetUser() is only used for other queries, so the connection shouldn't be closed.
             return user;
         }
 
@@ -435,6 +431,30 @@ namespace Youtube
                 connection.Open();
             }
             string query = "DELETE FROM SE_VIDEO WHERE VIDEOID='"+video.VideoID+"' ";
+
+            OracleCommand command = new OracleCommand(query, connection);
+            command.CommandType = CommandType.Text;
+
+            try
+            {
+                command.ExecuteNonQuery();
+            }
+            catch
+            {
+                return false;
+                // Catch if the command was not succesfully executed.
+            }
+            connection.Close();
+            return true;
+        }
+
+        public bool DeleteComment (int commentID)
+        {
+            if (connection.State != ConnectionState.Open)
+            {
+                connection.Open();
+            }
+            string query = "DELETE FROM SE_REACTIE WHERE REACTIEID='" + commentID + "' ";
 
             OracleCommand command = new OracleCommand(query, connection);
             command.CommandType = CommandType.Text;
