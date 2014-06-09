@@ -3,10 +3,11 @@ changed oracle date to varchar2 because oracle date is a pain in the ass.
 Video: uploader from User to string
 
 TO DO:
-Delete comment S
 Playlist C
+Add double views?
 
 SQL Injection?
-Logout?
+Logout button on Search results
+
 
 

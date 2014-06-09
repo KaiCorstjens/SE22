@@ -471,5 +471,28 @@ namespace Youtube
             connection.Close();
             return true;
         }
+
+        public void AddView(Video video)
+        {
+            if (connection.State != ConnectionState.Open)
+            {
+                connection.Open();
+            }
+            int newViews = video.Views + 1;
+
+               string  query = "UPDATE SE_VIDEO SET KEERBEKEKEN = '" + newViews + "' WHERE VIDEOID=" + video.VideoID;
+
+            OracleCommand command = new OracleCommand(query, connection);
+            command.CommandType = CommandType.Text;
+            try
+            {
+                command.ExecuteNonQuery();
+            }
+            catch
+            {
+                // Catch if reading from database was unsuccesful.
+            }
+            connection.Close();
+        }
     }
 }

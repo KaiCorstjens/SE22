@@ -28,9 +28,12 @@ namespace Youtube
             selectedVideos = new List<Video>();
             foreach (Video v in videos)
             {
-                if (v.Title.ToLower().Contains(search))
+                if (!v.Private)
                 {
-                    selectedVideos.Add(v);
+                    if (v.Title.ToLower().Contains(search))
+                    {
+                        selectedVideos.Add(v);
+                    }
                 }
             }
             try

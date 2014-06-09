@@ -19,13 +19,11 @@
             <asp:TextBox ID="tbPassword" runat="server" TextMode="Password"></asp:TextBox>
             <asp:Button ID="BtnLogIn" runat="server" OnClick="BtnLogIn_Click" Text="Log in" />
             <asp:Button ID="BtnRegister" runat="server" OnClick="BtnRegister_Click" Text="Register" style="width: 70px" />
+            <asp:Button ID="BtnLogout" runat="server" OnClick="BtnLogout_Click" Text="Uitloggen" Visible="False" />
             <asp:Label ID="lblErrorMessages" runat="server" Font-Bold="True" Text="ErrorMessages" Visible="False"></asp:Label>
             <br />
                 <div id="videoPlayer">
-                    <video id="HTMLVideo" runat="server" width="420" height="315" controls="controls">
-                    <source="" type="video/mp4" />
-                        Your browser does not support the video tag.
-                    </video>
+                    <iframe src="Video/TestVideo.mp4" id="VideoSource" runat="server" width ="420" height="315"></iframe> 
                 </div>
             <asp:Button ID="BtnDeleteVideo" runat="server" Text="Verwijder video" OnClick="BtnDeleteVideo_Click" Visible="False"/>
             <br />

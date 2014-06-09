@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit http://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <_PublishTargetUrl>C:\Users\Kai\Desktop\Website</_PublishTargetUrl>
+  </PropertyGroup>
+  <ItemGroup>
+    <File Include="bin/Oracle.DataAccess.dll">
+      <publishTime>12/20/2007 00:53:34</publishTime>
+    </File>
+    <File Include="bin/Youtube.dll">
+      <publishTime>06/06/2014 16:18:08</publishTime>
+    </File>
+    <File Include="Homepage.aspx">
+      <publishTime>06/06/2014 14:46:07</publishTime>
+    </File>
+    <File Include="SearchResults.aspx">
+      <publishTime>06/05/2014 21:29:13</publishTime>
+    </File>
+    <File Include="Upload.aspx">
+      <publishTime>06/05/2014 18:24:25</publishTime>
+    </File>
+    <File Include="Video/TestVideo.mp4">
+      <publishTime>06/05/2014 13:31:37</publishTime>
+    </File>
+    <File Include="Web.config">
+      <publishTime>06/06/2014 15:08:15</publishTime>
+    </File>
+  </ItemGroup>
+</Project>

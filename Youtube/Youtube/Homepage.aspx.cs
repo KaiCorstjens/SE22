@@ -59,7 +59,7 @@ namespace Youtube
                     }
                     else
                     {
-                        this.CurrentVideo = new Video(0, "Geen video's gevonden", null, string.Empty, false, null, string.Empty);
+                        this.CurrentVideo = new Video(1, "TestVideo", "kai", "TestVideo", false, null, @"Video/TestVideo.mp4");
                     }
                 }
                 if (CurrentUser != null)
@@ -71,18 +71,19 @@ namespace Youtube
             {
                 // No session found.
             }
-            
-            string path = Server.MapPath("/");
             int filenameBeginInt = CurrentVideo.Location.LastIndexOf(@"\");
             string filename = CurrentVideo.Location.Substring(filenameBeginInt);
-            string destinationPath = Server.MapPath("/") + @"Video\" + filename;
-            if (!File.Exists(destinationPath))
+            filename = filename.Replace(@"\", @"/");
+            string destinationPath = @"Video/" + filename;
+            /*if (!File.Exists(destinationPath))
             {
                 File.Copy(CurrentVideo.Location, destinationPath);
-            }
-            HTMLVideo.Src = @"Video\"+filename;
+            }*/
+            //HTMLVideo.Src = @"Video"+filename;
+            //VIDEOSource.Src = @"Video" + filename;
+            VideoSource.Src = @"Video" + filename;
             ChangeVideo(CurrentVideo);
-
+            databaseManager.AddView(CurrentVideo);
             Comments = databaseManager.GetComments(CurrentVideo);
             AddComments();
             if (CurrentVideo != null && CurrentUser != null)
@@ -123,6 +124,7 @@ namespace Youtube
                 BtnAddComment.Visible = true;
                 lblCommentInfo.Visible = false;
                 lblErrorMessages.Visible = true;
+                BtnLogout.Visible = true;
                 lblErrorMessages.ForeColor = System.Drawing.Color.Black;
                 lblErrorMessages.Text = "Succesvol ingelogd als "+loginUser.Username+".";
                 CurrentUser = loginUser;
@@ -133,7 +135,7 @@ namespace Youtube
                     BtnDeleteVideo.Visible = true;
                 }
                 AddComments();
-                //Session["User"] = CurrentUser;
+                Session["User"] = CurrentUser;
             }
             else
             {
@@ -141,6 +143,29 @@ namespace Youtube
                 lblErrorMessages.ForeColor = System.Drawing.Color.Red;
                 lblErrorMessages.Text = "Foute gebruikersnaam of wachtwoord.";
             }
+        }
+        public void LogOut()
+        {
+            CurrentUser = null;
+            BtnLogout.Visible = false;
+
+            lblUserloginName.Visible = true;
+            lblPassword.Visible = true;
+            tbLoginUsername.Visible = true;
+            tbPassword.Visible = true;
+            BtnLogIn.Visible = true;
+            BtnRegister.Visible = true;
+            tbAddComment.Visible = false;
+            BtnAddComment.Visible = false;
+            lblCommentInfo.Visible = true;
+            lblErrorMessages.Visible = true;
+            lblErrorMessages.ForeColor = System.Drawing.Color.Black;
+            lblErrorMessages.Text = "Succesvol uitgelogd.";
+            Session["Username"] = string.Empty;
+            Session["Password"] = string.Empty;
+                BtnDeleteVideo.Visible = false;
+            AddComments();
+            Session["User"] = null;
         }
         public void AddComments()
         {
@@ -302,6 +327,11 @@ namespace Youtube
                     lblErrorMessages.Text = "Video niet verwijderd";
                 }
             }
+        }
+
+        protected void BtnLogout_Click(object sender, EventArgs e)
+        {
+            LogOut();
         }
     }
 }

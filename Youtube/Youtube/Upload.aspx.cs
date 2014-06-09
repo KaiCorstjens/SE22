@@ -10,6 +10,8 @@ namespace Youtube
     using System.Web.UI;
     using System.Web.UI.WebControls;
     using System.IO;
+using System.Net;
+    using System.Text;
     public partial class Upload : System.Web.UI.Page
     {
         private User currentUser;
@@ -25,60 +27,77 @@ namespace Youtube
                 lblErrorMessages.Visible = true;
                 lblErrorMessages.ForeColor = System.Drawing.Color.Red;
                 lblErrorMessages.Text = "Je bent niet ingelogd, ga terug naar de homepage.";
+                BtnUpload.Enabled = false;
             }
         }
-
         protected void BtnUpload_Click(object sender, EventArgs e)
         {
             if (fileUpload.HasFile)
             {
-                string uploadFolder = @"C:\SE22\KaiCorstjens\Videos\";
-                string fileLocation = uploadFolder + fileUpload.FileName;
-                string newFileLocation;
-                int videoID = 0;
-                List<Video> videoList = databaseManager.GetAllVideos();
-                int highestVideoID = 0;
-                foreach (Video v in videoList)
+                //string uploadFolder = @"C:\SE22\KaiCorstjens\Videos\";
+                string filename;
+                filename = fileUpload.FileName.Replace(" ", "+");
+                string fileLocation = Server.MapPath("/") + @"/Video/" + filename;
+                int locationOfExtension = fileLocation.LastIndexOf('.');
+                string locationNoExtension = fileLocation.Substring(0, locationOfExtension);
+                if (fileLocation.Substring(locationOfExtension) == ".mp4")
                 {
-                    if (v.VideoID > highestVideoID)
+                    string newFileLocation;
+                    List<Video> videoList = databaseManager.GetAllVideos();
+                    int highestVideoID = 0;
+                    foreach (Video v in videoList)
                     {
-                        highestVideoID = v.VideoID + 1;
-                    }
-                }
-                // Check if file already exists. If it exists, add a number to it.
-                if (!Directory.Exists(uploadFolder))
-                {
-                    Directory.CreateDirectory(uploadFolder);
-                }
-                if (File.Exists(fileLocation))
-                {
-                    for (int i = 0; i <= 999; i++)
-                    {
-                        int locationOfExtension = fileLocation.LastIndexOf('.');
-                        string locationNoExtension = fileLocation.Substring(0, locationOfExtension);
-                        string extension = fileLocation.Substring(locationOfExtension);
-                        newFileLocation = locationNoExtension + i + extension;
-                        if (!File.Exists(newFileLocation))
+                        if (v.VideoID >= highestVideoID)
                         {
-                            fileLocation = newFileLocation;
-                            i = 1000;
+                            highestVideoID = v.VideoID + 1;
                         }
                     }
-                }
-                fileUpload.SaveAs(fileLocation);
-                Video newVideo = new Video(videoID,tbTitle.Text, currentUser.Username, tbDescription.Text,0,0,0,cbPrivé.Checked ,fileLocation);
-                if (databaseManager.AddVideo(newVideo))
-                {
-                    lblErrorMessages.Visible = true;
-                    lblErrorMessages.ForeColor = System.Drawing.Color.Black;
-                    lblErrorMessages.Text = "Video succes toegevoegd.";
+                    // Check if file already exists. If it exists, add a number to it.
+                    /*if (!Directory.Exists(uploadFolder))
+                    {
+                        Directory.CreateDirectory(uploadFolder);
+                    }*/
+                    if (File.Exists(fileLocation))
+                    {
+                        for (int i = 0; i <= 999; i++)
+                        {
+                            string extension = fileLocation.Substring(locationOfExtension);
+                            newFileLocation = locationNoExtension + i + extension;
+                            if (!File.Exists(newFileLocation))
+                            {
+                                fileLocation = newFileLocation;
+                                i = 1000;
+                            }
+                        }
+                    }
+
+                    fileUpload.SaveAs(fileLocation);
+                    Video newVideo = new Video(highestVideoID, tbTitle.Text, currentUser.Username, tbDescription.Text, 0, 0, 0, cbPrivé.Checked, fileLocation);
+                    if (databaseManager.AddVideo(newVideo))
+                    {
+                        lblErrorMessages.Visible = true;
+                        lblErrorMessages.ForeColor = System.Drawing.Color.Black;
+                        lblErrorMessages.Text = "Video met succes toegevoegd.";
+                    }
+                    else
+                    {
+                        lblErrorMessages.Visible = true;
+                        lblErrorMessages.ForeColor = System.Drawing.Color.Red;
+                        lblErrorMessages.Text = "Video niet toegevoegd.";
+                    }
                 }
                 else
                 {
                     lblErrorMessages.Visible = true;
                     lblErrorMessages.ForeColor = System.Drawing.Color.Red;
-                    lblErrorMessages.Text = "Video niet toegevoegd.";
+                    lblErrorMessages.Text = "Selecteer een .mp4-bestand.";
                 }
+            }
+            else
+            {
+                lblErrorMessages.Visible = true;
+                lblErrorMessages.ForeColor = System.Drawing.Color.Red;
+                lblErrorMessages.Text = "Geen bestand geselecteerd.";
             }
         }
 
