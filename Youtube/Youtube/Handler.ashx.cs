@@ -18,18 +18,12 @@ namespace Youtube
         public void ProcessRequest(HttpContext context)
         {
             int id = 6;
-
-            if (context.Request.QueryString["VideoID"] == null || int.TryParse(context.Request.QueryString["VideoID"], out id))
-            { }
-            
-              byte[]  video = databaseManager.GetVideoAsBlob(id);
-            
-
+            int.TryParse(context.Request.QueryString["VideoID"], out id);
+            byte[]  video = databaseManager.GetVideoAsBlob(id);
             context.Response.ContentType = "video/mp4";
             context.Response.BinaryWrite(video);
             context.Response.End();
             context.Response.Flush();
-
             }
 
         public bool IsReusable

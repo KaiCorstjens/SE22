@@ -150,7 +150,7 @@ namespace Youtube
             {
                 command.ExecuteNonQuery();
             }
-            catch (Exception ex)
+            catch 
             {
                 return false;
                 // Catch if the command was not succesfully executed.
@@ -164,7 +164,7 @@ namespace Youtube
         }
         public List<Playlist> GetPlaylists (string username)
         {
-            List<Playlist> PlaylistList = new List<Playlist>();
+            List<Playlist> playlistList = new List<Playlist>();
             if (connection.State != ConnectionState.Open)
             {
                 connection.Open();
@@ -184,7 +184,7 @@ namespace Youtube
                     playlistID = Convert.ToInt32(dataReader["AFSPEELLIJSTID"]);
                     name = Convert.ToString(dataReader["NAAM"]);
                     Playlist playlist = new Playlist(playlistID,GetUser(username),name);
-                    PlaylistList.Add(playlist);
+                    playlistList.Add(playlist);
                 }
                 
             }
@@ -193,7 +193,7 @@ namespace Youtube
                 // Catch if reading from the database doesn't work
             }
             connection.Close();
-            return PlaylistList;
+            return playlistList;
         }
 
         public bool AddVideoToPlaylist(int playlistID,int videoID)

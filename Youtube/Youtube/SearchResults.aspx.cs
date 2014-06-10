@@ -26,8 +26,8 @@ namespace Youtube
             try
             {
                 string playlistUser = Request.QueryString["ChooseplaylistUser"];
-                int VideoID = 0;
-                int.TryParse(Request.QueryString["video"], out VideoID);
+                int videoID = 0;
+                int.TryParse(Request.QueryString["video"], out videoID);
                 if (playlistUser != string.Empty)
                 {
                     Page.Title = "Afspeellijsten";
@@ -39,7 +39,7 @@ namespace Youtube
                         myLabel.ID = "Label" + p.PlaylistID;
                         Button myButton = new Button();
                         myButton.Text = "Kies";
-                        myButton.ID = "Play" + p.PlaylistID+"Vid"+VideoID;
+                        myButton.ID = "Play" + p.PlaylistID+"Vid"+videoID;
                         myButton.Click += new EventHandler(BtnChoosePlaylistClicked);
                         PnlSearchResults.Controls.Add(myLabel);
                         PnlSearchResults.Controls.Add(myButton);

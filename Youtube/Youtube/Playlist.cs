@@ -15,9 +15,9 @@ using System.Web;
         public List<Video> Videos { get; set; }
         public string Name { get; set; }
 
-        public Playlist(int PlaylistID, User user,string name)
+        public Playlist(int playlistID, User user,string name)
         {
-            this.PlaylistID = PlaylistID;
+            this.PlaylistID = playlistID;
             this.User = user;
             this.Name = name;
             Videos = new List<Video>();
