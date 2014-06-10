@@ -1,5 +1,5 @@
 ﻿// <copyright file="DatabaseManager.cs" company="Kai Corstjens">
-//     Copyright (c) Proftaak Kai Corstjens. All rights reserved.
+//     Copyright (c) Individuele opdracht Kai Corstjens. All rights reserved.
 // </copyright>
 namespace Youtube
 {
@@ -7,8 +7,9 @@ namespace Youtube
     using System.Collections.Generic;
     using System.Linq;
     using System.Web;
+    using System.IO;
+    using System.Data.OracleClient;
     using System.Data;
-    using Oracle.DataAccess.Client;
     using Oracle.DataAccess.Types;
 
     public class DatabaseManager
@@ -91,7 +92,72 @@ namespace Youtube
             connection.Close();
             return true;
         }
-        // Not according to class diagram, changed Add_Playlist to AddPlaylist.
+        public byte[] GetVideoAsBlob(int videoID)
+        {
+            if (connection.State != ConnectionState.Open)
+            {
+                connection.Open();
+            }
+            string query = "SELECT * FROM SE_VIDEO WHERE videoID ="+videoID;
+            OracleCommand command = new OracleCommand(query, connection);
+            command.CommandType = CommandType.Text;
+            OracleDataReader dataReader;
+            byte[] byteArray = new byte[1];
+            try
+            {
+                dataReader = command.ExecuteReader();
+                while (dataReader.Read())
+                {
+                    byteArray = (byte[])dataReader["BLOBFILE"];
+                }
+            }
+            catch
+            {
+
+            }
+            //stream = new MemoryStream(byteArray);
+            return byteArray;
+        }
+
+        public bool AddVideoAsBlob(Video video, Stream fs)
+        {
+            if (connection.State != ConnectionState.Open)
+            {
+                connection.Open();
+            }
+            byte[] byteArray = null;
+            BinaryReader reader = new BinaryReader(fs);
+            byteArray = reader.ReadBytes((int)fs.Length);
+            int isPrivate = 0;
+            if (video.Private)
+            {
+                isPrivate = 1;
+            }
+            else if (!video.Private)
+            {
+                isPrivate = 0;
+            }
+            string query = "INSERT INTO SE_VIDEO (VideoID,Titel,Uploader,Beschrijving,KeerBekeken,Datum,Likes,Dislikes,Prive,Categorie,BlobFile) VALUES (" + video.VideoID + ",'" + video.Title + "','" + video.Uploader + "','" + video.Description + "'," + 0 + "," + video.UploadDate + "," + 0 + "," + 0 + "," + isPrivate + ",'" + string.Empty + "',"+":blobParameter )";
+            OracleParameter blobParameter = new OracleParameter();
+            blobParameter.OracleType = OracleType.Blob;
+            blobParameter.ParameterName = "BlobParameter";
+            blobParameter.Value = byteArray;
+
+            OracleCommand command = new OracleCommand(query, connection);
+            command.Parameters.Add(blobParameter);
+            command.CommandType = CommandType.Text;
+            try
+            {
+                command.ExecuteNonQuery();
+            }
+            catch
+            {
+                return false;
+                // Catch if the command was not succesfully executed.
+            }
+            connection.Close();
+            return true;
+        }
         public bool AddPlaylist(Playlist playlist)
         {
             return true;
@@ -133,8 +199,9 @@ namespace Youtube
                         likes = Convert.ToInt32(dataReader["LIKES"]);
                         disLikes = Convert.ToInt32(dataReader["DISLIKES"]);
                         isPrivate = Convert.ToInt32(dataReader["PRIVE"]);
-                        //Comments
                         location = Convert.ToString(dataReader["FILENAME"]);
+                        //Comments
+                        //location = Convert.ToString(dataReader["FILENAME"]);
                         if (isPrivate == 1)
                         {
                             isPrivateBool = true;

@@ -19,7 +19,7 @@
                     <asp:Label ID="lblTitle" runat="server" Text="Titel"></asp:Label>
                 </td>
                 <td>
-                    <asp:TextBox ID="tbTitle" runat="server"></asp:TextBox>
+                    <asp:TextBox ID="tbTitle" runat="server" DefaultButton="BtnUpload"></asp:TextBox>
                 </td>
             </tr>
             <tr>
@@ -35,7 +35,7 @@
                     <asp:Label ID="lblDescription" runat="server" Text="Omschrijving"></asp:Label>
                 </td>
                 <td>
-                    <asp:TextBox ID="tbDescription" runat="server"></asp:TextBox>
+                    <asp:TextBox ID="tbDescription" runat="server" DefaultButton="BtnUpload"></asp:TextBox>
                 </td>
             </tr>
             <tr>

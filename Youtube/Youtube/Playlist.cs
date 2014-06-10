@@ -1,5 +1,5 @@
 ﻿// <copyright file="Playlist.cs" company="Kai Corstjens">
-//     Copyright (c) Proftaak Kai Corstjens. All rights reserved.
+//     Copyright (c) Individuele opdracht Kai Corstjens. All rights reserved.
 // </copyright>
 namespace Youtube
 {

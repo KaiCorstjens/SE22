@@ -121,13 +121,13 @@ namespace Youtube {
         protected global::System.Web.UI.WebControls.Label lblErrorMessages;
         
         /// <summary>
-        /// VideoSource control.
+        /// HTMLvideo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlIframe VideoSource;
+        protected global::System.Web.UI.HtmlControls.HtmlSource HTMLvideo;
         
         /// <summary>
         /// BtnDeleteVideo control.

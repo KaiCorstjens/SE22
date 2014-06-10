@@ -1,5 +1,5 @@
 ﻿// <copyright file="AssemblyInfo.cs" company="Kai Corstjens">
-//     Copyright (c) Proftaak Kai Corstjens. All rights reserved.
+//     Copyright (c) Individuele opdracht Kai Corstjens. All rights reserved.
 // </copyright>
 using System.Reflection;
 using System.Runtime.CompilerServices;

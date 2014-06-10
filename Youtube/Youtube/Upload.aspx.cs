@@ -24,6 +24,10 @@ using System.Net;
             }
             catch
             {
+            }
+            if (currentUser == null)
+            {
+
                 lblErrorMessages.Visible = true;
                 lblErrorMessages.ForeColor = System.Drawing.Color.Red;
                 lblErrorMessages.Text = "Je bent niet ingelogd, ga terug naar de homepage.";
@@ -32,17 +36,17 @@ using System.Net;
         }
         protected void BtnUpload_Click(object sender, EventArgs e)
         {
-            if (fileUpload.HasFile)
+            if (fileUpload.HasFile && tbTitle.Text != string.Empty)
             {
-                //string uploadFolder = @"C:\SE22\KaiCorstjens\Videos\";
+                string appPath = HttpContext.Current.Request.ApplicationPath;
+                string uploadFolder = HttpContext.Current.Request.MapPath(appPath);
                 string filename;
                 filename = fileUpload.FileName.Replace(" ", "+");
-                string fileLocation = Server.MapPath("/") + @"/Video/" + filename;
+                string fileLocation = uploadFolder+ @"\Video\" + filename;
                 int locationOfExtension = fileLocation.LastIndexOf('.');
                 string locationNoExtension = fileLocation.Substring(0, locationOfExtension);
                 if (fileLocation.Substring(locationOfExtension) == ".mp4")
                 {
-                    string newFileLocation;
                     List<Video> videoList = databaseManager.GetAllVideos();
                     int highestVideoID = 0;
                     foreach (Video v in videoList)
@@ -52,28 +56,10 @@ using System.Net;
                             highestVideoID = v.VideoID + 1;
                         }
                     }
-                    // Check if file already exists. If it exists, add a number to it.
-                    /*if (!Directory.Exists(uploadFolder))
-                    {
-                        Directory.CreateDirectory(uploadFolder);
-                    }*/
-                    if (File.Exists(fileLocation))
-                    {
-                        for (int i = 0; i <= 999; i++)
-                        {
-                            string extension = fileLocation.Substring(locationOfExtension);
-                            newFileLocation = locationNoExtension + i + extension;
-                            if (!File.Exists(newFileLocation))
-                            {
-                                fileLocation = newFileLocation;
-                                i = 1000;
-                            }
-                        }
-                    }
 
-                    fileUpload.SaveAs(fileLocation);
-                    Video newVideo = new Video(highestVideoID, tbTitle.Text, currentUser.Username, tbDescription.Text, 0, 0, 0, cbPrivé.Checked, fileLocation);
-                    if (databaseManager.AddVideo(newVideo))
+                    Video newVideo = new Video(highestVideoID, tbTitle.Text, currentUser.Username, tbDescription.Text, 0, 0, 0, cbPrivé.Checked, string.Empty);
+                    Stream stream = fileUpload.PostedFile.InputStream;
+                    if (databaseManager.AddVideoAsBlob(newVideo,stream))
                     {
                         lblErrorMessages.Visible = true;
                         lblErrorMessages.ForeColor = System.Drawing.Color.Black;
@@ -97,7 +83,7 @@ using System.Net;
             {
                 lblErrorMessages.Visible = true;
                 lblErrorMessages.ForeColor = System.Drawing.Color.Red;
-                lblErrorMessages.Text = "Geen bestand geselecteerd.";
+                lblErrorMessages.Text = "Geen bestand geselecteerd of geen titel ingevoerd.";
             }
         }
 

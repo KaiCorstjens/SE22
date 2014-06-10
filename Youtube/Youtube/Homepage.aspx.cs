@@ -1,5 +1,5 @@
 ﻿// <copyright file="Homepage.aspx.cs" company="Kai Corstjens">
-//     Copyright (c) Proftaak Kai Corstjens. All rights reserved.
+//     Copyright (c) Individuele opdracht Kai Corstjens. All rights reserved.
 // </copyright>
 namespace Youtube
 {
@@ -24,6 +24,14 @@ namespace Youtube
         private int currentVideoID;
         protected void Page_Load(object sender, EventArgs e)
         {
+            //lblErrorMessages.Visible = true;
+            System.Web.HttpBrowserCapabilities browser = Request.Browser;
+            if (browser.Browser != "Firefox")
+            {
+                lblErrorMessages.Visible = true;
+                lblErrorMessages.ForeColor = System.Drawing.Color.Red;
+                lblErrorMessages.Text = "Please use Firefox";
+            }
             if (databaseManager == null)
             {
                 databaseManager = new DatabaseManager();
@@ -34,7 +42,6 @@ namespace Youtube
             }
             try
             {
-                //CurrentUser = (User)Session["User"];
                 string username = (string)(Session["Username"]);
                 string password = (string)(Session["Password"]);
                 if (username != string.Empty && username != null && password != null && password != string.Empty)
@@ -57,10 +64,6 @@ namespace Youtube
                             }
                         }
                     }
-                    else
-                    {
-                        this.CurrentVideo = new Video(1, "TestVideo", "kai", "TestVideo", false, null, @"Video/TestVideo.mp4");
-                    }
                 }
                 if (CurrentUser != null)
                 {
@@ -71,21 +74,13 @@ namespace Youtube
             {
                 // No session found.
             }
-            int filenameBeginInt = CurrentVideo.Location.LastIndexOf(@"\");
-            string filename = CurrentVideo.Location.Substring(filenameBeginInt);
-            filename = filename.Replace(@"\", @"/");
-            string destinationPath = @"Video/" + filename;
-            /*if (!File.Exists(destinationPath))
+            if (CurrentVideo != null)
             {
-                File.Copy(CurrentVideo.Location, destinationPath);
-            }*/
-            //HTMLVideo.Src = @"Video"+filename;
-            //VIDEOSource.Src = @"Video" + filename;
-            VideoSource.Src = @"Video" + filename;
-            ChangeVideo(CurrentVideo);
-            databaseManager.AddView(CurrentVideo);
-            Comments = databaseManager.GetComments(CurrentVideo);
-            AddComments();
+                ChangeVideo(CurrentVideo);
+                databaseManager.AddView(CurrentVideo);
+                Comments = databaseManager.GetComments(CurrentVideo);
+                AddComments();
+            }
             if (CurrentVideo != null && CurrentUser != null)
             {
                 if (CurrentVideo.Uploader == CurrentUser.Username)
@@ -94,7 +89,6 @@ namespace Youtube
                 }
                 AddComments();
             }
-            // HTMLVideo.Src = @"C:\SE22\KaiCorstjens\Videos\CurrentVideo4.mp4";
         }
        
         public void ChangeVideo(Video video)
@@ -107,6 +101,7 @@ namespace Youtube
             lblViews.Text = Convert.ToString(CurrentVideo.Views);
             BtnLikes.Text = Convert.ToString(CurrentVideo.Likes);
             BtnDislikes.Text = Convert.ToString(CurrentVideo.DisLikes);
+            HTMLvideo.Src = "Handler.ashx?videoID=" +CurrentVideo.VideoID;
         }
 
         public void Login(User loginUser)
@@ -130,9 +125,12 @@ namespace Youtube
                 CurrentUser = loginUser;
                 Session["Username"] = CurrentUser.Username;
                 Session["Password"] = CurrentUser.Password;
-                if (CurrentVideo.Uploader == CurrentUser.Username)
+                if (CurrentVideo != null)
                 {
-                    BtnDeleteVideo.Visible = true;
+                    if (CurrentVideo.Uploader == CurrentUser.Username)
+                    {
+                        BtnDeleteVideo.Visible = true;
+                    }
                 }
                 AddComments();
                 Session["User"] = CurrentUser;
@@ -170,30 +168,33 @@ namespace Youtube
         public void AddComments()
         {
             PnlComments.Controls.Clear();
-            Comments = databaseManager.GetComments(CurrentVideo);
-            foreach (Comment c in Comments)
+            if (CurrentVideo != null)
             {
-                Label lblComment = new Label();
-                lblComment.Text = c.Text;
-                lblComment.ID = "CommentTxt" + c.CommentID;
-                Label lblCommentPoster = new Label();
-                lblCommentPoster.Text = " --  posted by " + c.Poster.Username;
-                lblCommentPoster.ID = "CommentPoster" + c.CommentID;
-                lblCommentPoster.Font.Size = FontUnit.Small;
-                Button btnDeleteComment = new Button();
-                btnDeleteComment.Text = "verwijder reactie";
-                btnDeleteComment.ID = "BtnDelete" + c.CommentID;
-                PnlComments.Controls.Add(lblComment);
-                PnlComments.Controls.Add(lblCommentPoster);
-                btnDeleteComment.Click += new EventHandler(DeleteComment);
-                if (CurrentUser != null && c != null)
+                Comments = databaseManager.GetComments(CurrentVideo);
+                foreach (Comment c in Comments)
                 {
-                    if (CurrentUser.Username == c.Poster.Username)
+                    Label lblComment = new Label();
+                    lblComment.Text = c.Text;
+                    lblComment.ID = "CommentTxt" + c.CommentID;
+                    Label lblCommentPoster = new Label();
+                    lblCommentPoster.Text = " --  posted by " + c.Poster.Username;
+                    lblCommentPoster.ID = "CommentPoster" + c.CommentID;
+                    lblCommentPoster.Font.Size = FontUnit.Small;
+                    Button btnDeleteComment = new Button();
+                    btnDeleteComment.Text = "verwijder reactie";
+                    btnDeleteComment.ID = "BtnDelete" + c.CommentID;
+                    PnlComments.Controls.Add(lblComment);
+                    PnlComments.Controls.Add(lblCommentPoster);
+                    btnDeleteComment.Click += new EventHandler(DeleteComment);
+                    if (CurrentUser != null && c != null)
                     {
-                        PnlComments.Controls.Add(btnDeleteComment);
+                        if (CurrentUser.Username == c.Poster.Username)
+                        {
+                            PnlComments.Controls.Add(btnDeleteComment);
+                        }
                     }
+                    PnlComments.Controls.Add(new LiteralControl("<br />"));
                 }
-                PnlComments.Controls.Add(new LiteralControl("<br />"));
             }
         }
         protected void DeleteComment(object sender, EventArgs e)
@@ -242,7 +243,7 @@ namespace Youtube
             {
                 lblErrorMessages.Visible = true;
                 lblErrorMessages.ForeColor = System.Drawing.Color.Red;
-                lblErrorMessages.Text = "Like niet toegevoegd, fout in de verbinding.";
+                lblErrorMessages.Text = "Like niet toegevoegd, fout met de verbinding.";
             }
         }
         protected void BtnDislikes_Click(object sender, EventArgs e)
@@ -253,7 +254,7 @@ namespace Youtube
             {
                 lblErrorMessages.Visible = true;
                 lblErrorMessages.ForeColor = System.Drawing.Color.Red;
-                lblErrorMessages.Text = "Dislike niet toegevoegd, fout in de verbinding.";
+                lblErrorMessages.Text = "Dislike niet toegevoegd, fout met de verbinding.";
             }
         }
         protected void BtnRegister_Click(object sender, EventArgs e)
@@ -292,7 +293,6 @@ namespace Youtube
         {
             if (tbAddComment.Text != string.Empty)
             {
-               // int commentID = Comments.Count() + 1;
                 int highestCommentID = 0;
                 foreach (Comment c in Comments)
                 {
