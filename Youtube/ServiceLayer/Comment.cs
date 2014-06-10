@@ -43,17 +43,5 @@ namespace Youtube.ServiceLayer
             this.Likes = 0;
             this.CommentOn = commentOn;
         }
-
-        // Not according to class diagram, changed name from New_Reaction to NewComment, thought it makes more sense.
-        public bool NewComment(Video video)
-        {
-            return true;
-        }
-
-        public bool NewComment(Video video,Comment comment)
-        {
-            return true;
-        }
-
     }
 }

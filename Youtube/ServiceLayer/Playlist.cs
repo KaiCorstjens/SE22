@@ -22,9 +22,5 @@ using System.Web;
             this.Name = name;
             Videos = new List<Video>();
         }
-        public bool AddVideo(Video video)
-        {
-            return true;
-        }
     }
 }

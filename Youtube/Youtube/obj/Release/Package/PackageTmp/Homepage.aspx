@@ -52,7 +52,12 @@
                     <asp:Button ID="BtnAddComment" runat="server" Text="Reageer" OnClick="BtnAddComment_Click" Visible="False" />
                     <asp:Label ID="lblCommentInfo" runat="server" Font-Italic="True" Font-Size="Small" Text="Je moet ingelogd zijn om reactie's te plaatsen"></asp:Label>
                     <br />
-            <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="true">
+            <asp:GridView ID="GridView" runat="server" AutoGenerateColumns="true" OnRowCommand="GridView_RowCommand">
+                <Columns> 
+                    <asp:ButtonField ButtonType="button" CommandName="DeleteComment" 
+         HeaderText="Verwijder reactie" Text="Verwijderen" />
+
+                </Columns>
 </asp:GridView>
             
                     <br />

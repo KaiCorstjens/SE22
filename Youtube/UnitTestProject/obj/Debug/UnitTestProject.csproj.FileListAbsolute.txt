@@ -1,0 +1,11 @@
+C:\Users\Kai\Dropbox\School\P4\Software\Projects\Individuele Opdracht\Youtube\UnitTestProject\bin\Debug\UnitTestProject.dll
+C:\Users\Kai\Dropbox\School\P4\Software\Projects\Individuele Opdracht\Youtube\UnitTestProject\bin\Debug\UnitTestProject.pdb
+C:\Users\Kai\Dropbox\School\P4\Software\Projects\Individuele Opdracht\Youtube\UnitTestProject\bin\Debug\DataAccess.dll
+C:\Users\Kai\Dropbox\School\P4\Software\Projects\Individuele Opdracht\Youtube\UnitTestProject\bin\Debug\ServiceLayer.dll
+C:\Users\Kai\Dropbox\School\P4\Software\Projects\Individuele Opdracht\Youtube\UnitTestProject\bin\Debug\Youtube.dll
+C:\Users\Kai\Dropbox\School\P4\Software\Projects\Individuele Opdracht\Youtube\UnitTestProject\bin\Debug\DataAccess.pdb
+C:\Users\Kai\Dropbox\School\P4\Software\Projects\Individuele Opdracht\Youtube\UnitTestProject\bin\Debug\ServiceLayer.pdb
+C:\Users\Kai\Dropbox\School\P4\Software\Projects\Individuele Opdracht\Youtube\UnitTestProject\bin\Debug\Youtube.pdb
+C:\Users\Kai\Dropbox\School\P4\Software\Projects\Individuele Opdracht\Youtube\UnitTestProject\obj\Debug\UnitTestProject.csprojResolveAssemblyReference.cache
+C:\Users\Kai\Dropbox\School\P4\Software\Projects\Individuele Opdracht\Youtube\UnitTestProject\obj\Debug\UnitTestProject.dll
+C:\Users\Kai\Dropbox\School\P4\Software\Projects\Individuele Opdracht\Youtube\UnitTestProject\obj\Debug\UnitTestProject.pdb

@@ -61,17 +61,5 @@ namespace Youtube.ServiceLayer
             this.Comments = commentList;
             this.Location = fileLocation;
         }
-
-        public void LikeVideo(bool like)
-        {
-            if (like)
-            {
-                Likes++;
-            }
-            else if (!like)
-            {
-                Likes--;
-            }
-        }
     }
 }

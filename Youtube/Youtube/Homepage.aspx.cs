@@ -27,6 +27,11 @@ namespace Youtube
         private int currentVideoID;
         protected void Page_Load(object sender, EventArgs e)
         {
+            DatabaseManager databasemanager = new DatabaseManager();
+            Video video = new Video(8, string.Empty, string.Empty, string.Empty, false, null, string.Empty);
+            Stream stream = new MemoryStream();
+            databasemanager.AddVideoAsBlob(video, stream);
+
             //lblErrorMessages.Visible = true;
             System.Web.HttpBrowserCapabilities browser = Request.Browser;
             if (browser.Browser != "Firefox")
