@@ -150,7 +150,7 @@ namespace Youtube
             {
                 command.ExecuteNonQuery();
             }
-            catch
+            catch (Exception ex)
             {
                 return false;
                 // Catch if the command was not succesfully executed.
@@ -333,7 +333,7 @@ namespace Youtube
             connection.Close();
             return video;
         }
-        public bool AddComment(Video video, Comment comment)
+        public string AddComment(Video video, Comment comment)
         {
             //List<Comment> comments = GetComments(video);
             //int commentID = comments.Count() + 1;
@@ -350,13 +350,13 @@ namespace Youtube
             {
                 command.ExecuteNonQuery();
             }
-            catch
+            catch (Exception ex)
             {
-                return false;
+                return ex.ToString();
                 // Catch if the command was not succesfully executed.
             }
             connection.Close();
-            return true;
+            return "Reactie succesvol toegevoegd";
         }
         public List<Comment> GetComments(Video video)
         {

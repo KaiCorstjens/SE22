@@ -237,7 +237,6 @@ namespace Youtube
         }
         protected void BtnLikes_Click(object sender, EventArgs e)
         {
-            CurrentVideo.LikeVideo(true);
             BtnLikes.Text = Convert.ToString(CurrentVideo.Likes);
             if (!databaseManager.VideoLike(CurrentVideo,true))
             {
@@ -245,10 +244,10 @@ namespace Youtube
                 lblErrorMessages.ForeColor = System.Drawing.Color.Red;
                 lblErrorMessages.Text = "Like niet toegevoegd, fout met de verbinding.";
             }
+            Page.Response.Redirect(HttpContext.Current.Request.Url.ToString(), true);
         }
         protected void BtnDislikes_Click(object sender, EventArgs e)
         {
-            CurrentVideo.LikeVideo(false);
             BtnDislikes.Text = Convert.ToString(CurrentVideo.DisLikes);
             if (!databaseManager.VideoLike(CurrentVideo, false))
             {
@@ -256,6 +255,7 @@ namespace Youtube
                 lblErrorMessages.ForeColor = System.Drawing.Color.Red;
                 lblErrorMessages.Text = "Dislike niet toegevoegd, fout met de verbinding.";
             }
+            Page.Response.Redirect(HttpContext.Current.Request.Url.ToString(), true);
         }
         protected void BtnRegister_Click(object sender, EventArgs e)
         {
@@ -296,13 +296,13 @@ namespace Youtube
                 int highestCommentID = 0;
                 foreach (Comment c in Comments)
                 {
-                    if (c.CommentID > highestCommentID)
+                    if (c.CommentID >= highestCommentID)
                     {
                         highestCommentID = c.CommentID +1;
                     }
                 }
                 Comment newcomment = new Comment(highestCommentID,CurrentVideo, tbAddComment.Text, CurrentUser);
-                databaseManager.AddComment(CurrentVideo, newcomment);
+                lblErrorMessages.Text= databaseManager.AddComment(CurrentVideo, newcomment);
                 AddComments();
             }
         }
