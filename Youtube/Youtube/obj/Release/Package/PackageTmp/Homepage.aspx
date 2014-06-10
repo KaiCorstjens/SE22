@@ -11,7 +11,8 @@
         <div>
             <asp:TextBox ID="tbSearchBar" runat="server" Width="881px"></asp:TextBox>
             <asp:Button ID="BtnSearch" runat="server" Text="Search" OnClick="BtnSearch_Click" />
-            <asp:Button ID="BtnUpload" runat="server" OnClick="BtnUpload_Click" Text="Upload" />
+            <asp:Button ID="BtnUpload" runat="server" OnClick="BtnUpload_Click" Text="Upload" Visible="False" />
+            <asp:Button ID="BtnPlaylists" runat="server" OnClick="BtnPlaylists_Click" Text="Playlists" Visible="False" />
             <br />
             <asp:Label ID="lblUserloginName" runat="server" Text="Username"></asp:Label>
             <asp:TextBox ID="tbLoginUsername" runat="server"></asp:TextBox>
@@ -29,6 +30,7 @@
                     </video> 
             </div>
             <asp:Button ID="BtnDeleteVideo" runat="server" Text="Verwijder video" OnClick="BtnDeleteVideo_Click" Visible="False"/>
+            <asp:Button ID="BtnAddtoPlaylist" runat="server" OnClick="BtnAddtoPlaylist_Click" Text="Toevoegen aan afspeelijst" Visible="False" />
             <br />
             <asp:Label ID="lblTitle" runat="server" Text="Title" Font-Bold="True" Font-Size="X-Large"></asp:Label>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

@@ -30,6 +30,7 @@
                     </video> 
             </div>
             <asp:Button ID="BtnDeleteVideo" runat="server" Text="Verwijder video" OnClick="BtnDeleteVideo_Click" Visible="False"/>
+            <asp:Button ID="BtnAddtoPlaylist" runat="server" OnClick="BtnAddtoPlaylist_Click" Text="Toevoegen aan afspeelijst" Visible="False" />
             <br />
             <asp:Label ID="lblTitle" runat="server" Text="Title" Font-Bold="True" Font-Size="X-Large"></asp:Label>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

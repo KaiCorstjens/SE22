@@ -64,12 +64,14 @@ using System.Net;
                         lblErrorMessages.Visible = true;
                         lblErrorMessages.ForeColor = System.Drawing.Color.Black;
                         lblErrorMessages.Text = "Video met succes toegevoegd.";
+                        Page.Title = "Video geüpload";
                     }
                     else
                     {
                         lblErrorMessages.Visible = true;
                         lblErrorMessages.ForeColor = System.Drawing.Color.Red;
                         lblErrorMessages.Text = "Video niet toegevoegd.";
+                        Page.Title = "Video niet geüpload";
                     }
                 }
                 else

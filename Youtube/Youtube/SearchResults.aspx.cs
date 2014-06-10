@@ -25,9 +25,39 @@ namespace Youtube
             playlistID = 0;
             try
             {
+                string playlistUser = Request.QueryString["ChooseplaylistUser"];
+                int VideoID = 0;
+                int.TryParse(Request.QueryString["video"], out VideoID);
+                if (playlistUser != string.Empty)
+                {
+                    Page.Title = "Afspeellijsten";
+                    playlists = databaseManager.GetPlaylists(playlistUser);
+                    foreach (Playlist p in playlists)
+                    {
+                        Label myLabel = new Label();
+                        myLabel.Text = p.Name;
+                        myLabel.ID = "Label" + p.PlaylistID;
+                        Button myButton = new Button();
+                        myButton.Text = "Kies";
+                        myButton.ID = "Play" + p.PlaylistID+"Vid"+VideoID;
+                        myButton.Click += new EventHandler(BtnChoosePlaylistClicked);
+                        PnlSearchResults.Controls.Add(myLabel);
+                        PnlSearchResults.Controls.Add(myButton);
+                        PnlSearchResults.Controls.Add(new LiteralControl("<br />"));
+                    }
+                }
+            }
+            catch
+            {
+
+            }
+            try
+            {
                 string playlistUser = Request.QueryString["playlistUser"];
                 if (playlistUser != string.Empty)
                 {
+
+                    Page.Title = "Afspeellijsten";
                     playlists = databaseManager.GetPlaylists(playlistUser);
                     foreach (Playlist p in playlists)
                     {
@@ -82,6 +112,7 @@ namespace Youtube
                 {
                     tbSearchBar.Text = search;
                 }
+                Page.Title = search;
                 videos = databaseManager.GetAllVideos();
                 foreach (Video v in videos)
                 {
@@ -169,6 +200,18 @@ namespace Youtube
                 string url = "SearchResults.aspx?PlaylistID=" + playlistID;
                 Response.Redirect(url);
             }
+        }
+
+        protected void BtnChoosePlaylistClicked(object sender, EventArgs e)
+        {
+            int playlistID = 0;
+            Button clickedButton = (Button)sender;
+            int videoID;
+            string buttonID = clickedButton.ID.ToString();
+            int beginOfVideo = buttonID.IndexOf("Vid");
+            int.TryParse(buttonID.Substring(4,buttonID.Length-3-beginOfVideo), out playlistID);
+            int.TryParse(buttonID.Substring(beginOfVideo+3),out videoID);
+                databaseManager.AddVideoToPlaylist(playlistID,videoID);
         }
         protected void BtnUpload_Click(object sender, EventArgs e)
         {

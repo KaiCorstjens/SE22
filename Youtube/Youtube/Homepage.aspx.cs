@@ -121,6 +121,7 @@ namespace Youtube
                 BtnPlaylists.Visible = true;
                 BtnUpload.Visible = true;
                 lblErrorMessages.Visible = true;
+                BtnAddtoPlaylist.Visible = true;
                 BtnLogout.Visible = true;
                 lblErrorMessages.ForeColor = System.Drawing.Color.Black;
                 lblErrorMessages.Text = "Succesvol ingelogd als "+loginUser.Username+".";
@@ -160,6 +161,7 @@ namespace Youtube
             lblCommentInfo.Visible = true;
             BtnPlaylists.Visible = false;
             BtnUpload.Visible = false;
+            BtnAddtoPlaylist.Visible = false;
             lblErrorMessages.Visible = true;
             lblErrorMessages.ForeColor = System.Drawing.Color.Black;
             lblErrorMessages.Text = "Succesvol uitgelogd.";
@@ -331,7 +333,13 @@ namespace Youtube
 
         protected void BtnPlaylists_Click(object sender, EventArgs e)
         {
-            string url = "SearchREsults.aspx?playlistUser=" + CurrentUser.Username;
+            string url = "SearchResults.aspx?playlistUser=" + CurrentUser.Username;
+            Response.Redirect(url);
+        }
+
+        protected void BtnAddtoPlaylist_Click(object sender, EventArgs e)
+        {
+            string url = "SearchResults.aspx?ChooseplaylistUser=" + CurrentUser.Username+"&video="+CurrentVideo.VideoID;
             Response.Redirect(url);
         }
     }

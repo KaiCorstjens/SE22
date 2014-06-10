@@ -196,6 +196,30 @@ namespace Youtube
             return PlaylistList;
         }
 
+        public bool AddVideoToPlaylist(int playlistID,int videoID)
+        {
+            if (connection.State != ConnectionState.Open)
+            {
+                connection.Open();
+            }
+            string query = "INSERT INTO SE_VIDEOPERAFSPEELLIJST (AFSPEELLIJSTID,VIDEOID) VALUES ('" + playlistID + "','" + videoID + "')";
+
+            OracleCommand command = new OracleCommand(query, connection);
+            command.CommandType = CommandType.Text;
+
+            try
+            {
+                command.ExecuteNonQuery();
+            }
+            catch
+            {
+                return false;
+                // Catch if the command was not succesfully executed.
+            }
+            connection.Close();
+            return true;
+        }
+
         public List<Video> GetVideoFromPlaylist(int playlistId)
         {
             List<Video> videoList = new List<Video>();
