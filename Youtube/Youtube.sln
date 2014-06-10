@@ -5,7 +5,11 @@ VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Youtube", "Youtube\Youtube.csproj", "{454A1066-F342-47C2-AFBE-96853FAFD45C}"
 EndProject
-Project("{F088123C-0E9E-452A-89E6-6BA2F21D5CAC}") = "ModelingProject1", "ModelingProject1\ModelingProject1.modelproj", "{C031BEB0-5B8F-4A63-9CFB-9D435C59312D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess", "DataAccess\DataAccess.csproj", "{DDD4D663-AF0F-45B5-96C9-07A8DB6FB201}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceLayer", "ServiceLayer\ServiceLayer.csproj", "{0B81F299-20BF-489B-89B7-64160FEB977C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestProject", "UnitTestProject\UnitTestProject.csproj", "{1492A66D-D530-4FF6-BF24-8B8AE3910F1B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +21,18 @@ Global
 		{454A1066-F342-47C2-AFBE-96853FAFD45C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{454A1066-F342-47C2-AFBE-96853FAFD45C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{454A1066-F342-47C2-AFBE-96853FAFD45C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C031BEB0-5B8F-4A63-9CFB-9D435C59312D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C031BEB0-5B8F-4A63-9CFB-9D435C59312D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C031BEB0-5B8F-4A63-9CFB-9D435C59312D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C031BEB0-5B8F-4A63-9CFB-9D435C59312D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DDD4D663-AF0F-45B5-96C9-07A8DB6FB201}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DDD4D663-AF0F-45B5-96C9-07A8DB6FB201}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DDD4D663-AF0F-45B5-96C9-07A8DB6FB201}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DDD4D663-AF0F-45B5-96C9-07A8DB6FB201}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0B81F299-20BF-489B-89B7-64160FEB977C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0B81F299-20BF-489B-89B7-64160FEB977C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0B81F299-20BF-489B-89B7-64160FEB977C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0B81F299-20BF-489B-89B7-64160FEB977C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1492A66D-D530-4FF6-BF24-8B8AE3910F1B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1492A66D-D530-4FF6-BF24-8B8AE3910F1B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1492A66D-D530-4FF6-BF24-8B8AE3910F1B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1492A66D-D530-4FF6-BF24-8B8AE3910F1B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

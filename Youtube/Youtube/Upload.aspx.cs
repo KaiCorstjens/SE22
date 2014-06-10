@@ -10,8 +10,10 @@ namespace Youtube
     using System.Web.UI;
     using System.Web.UI.WebControls;
     using System.IO;
-using System.Net;
+    using System.Net;
     using System.Text;
+    using Youtube.DataAccess;
+    using Youtube.ServiceLayer;
     public partial class Upload : System.Web.UI.Page
     {
         private User currentUser;

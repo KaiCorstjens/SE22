@@ -31,6 +31,7 @@
             </div>
             <asp:Button ID="BtnDeleteVideo" runat="server" Text="Verwijder video" OnClick="BtnDeleteVideo_Click" Visible="False"/>
             <asp:Button ID="BtnAddtoPlaylist" runat="server" OnClick="BtnAddtoPlaylist_Click" Text="Toevoegen aan afspeelijst" Visible="False" />
+            
             <br />
             <asp:Label ID="lblTitle" runat="server" Text="Title" Font-Bold="True" Font-Size="X-Large"></asp:Label>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -51,9 +52,15 @@
                     <asp:Button ID="BtnAddComment" runat="server" Text="Reageer" OnClick="BtnAddComment_Click" Visible="False" />
                     <asp:Label ID="lblCommentInfo" runat="server" Font-Italic="True" Font-Size="Small" Text="Je moet ingelogd zijn om reactie's te plaatsen"></asp:Label>
                     <br />
-                    <asp:Panel ID="PnlComments" runat="server">
+            <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="true">
+</asp:GridView>
+            
+                    <br />
+                    <asp:Panel ID="PnlComments" runat="server" Visible="False">
                     </asp:Panel>
                 </div>
+            <br />
+            
             <br />
         </div>
     </form>

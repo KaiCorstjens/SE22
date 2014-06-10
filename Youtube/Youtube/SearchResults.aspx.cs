@@ -9,6 +9,8 @@ namespace Youtube
     using System.Web;
     using System.Web.UI;
     using System.Web.UI.WebControls;
+    using Youtube.DataAccess;
+    using Youtube.ServiceLayer;
 
     public partial class SearchResults : System.Web.UI.Page
     {
@@ -19,6 +21,7 @@ namespace Youtube
         private string search;
         private int playlistID;
         private User currentUser;
+        private TextBox tbPlaylistName = new TextBox();
         protected void Page_Load(object sender, EventArgs e)
         {
             selectedVideos = new List<Video>();
@@ -41,9 +44,9 @@ namespace Youtube
                         myButton.Text = "Kies";
                         myButton.ID = "Play" + p.PlaylistID+"Vid"+videoID;
                         myButton.Click += new EventHandler(BtnChoosePlaylistClicked);
-                        PnlSearchResults.Controls.Add(myLabel);
-                        PnlSearchResults.Controls.Add(myButton);
-                        PnlSearchResults.Controls.Add(new LiteralControl("<br />"));
+                            PnlSearchResults.Controls.Add(myLabel);
+                            PnlSearchResults.Controls.Add(myButton);
+                            PnlSearchResults.Controls.Add(new LiteralControl("<br />"));
                     }
                 }
             }
@@ -96,10 +99,26 @@ namespace Youtube
                     myButton.Text = "Bekijken";
                     myButton.ID = "Button" + v.VideoID;
                     myButton.Click += new EventHandler(BtnClicked);
-                    PnlSearchResults.Controls.Add(myLabel);
-                    PnlSearchResults.Controls.Add(myButton);
-                    PnlSearchResults.Controls.Add(new LiteralControl("<br />"));
+                    Control myControl = PnlSearchResults.FindControl("Button" + v.VideoID);
+                    if (myControl == null)
+                    {
+                        PnlSearchResults.Controls.Add(myLabel);
+                        PnlSearchResults.Controls.Add(myButton);
+                        PnlSearchResults.Controls.Add(new LiteralControl("<br />"));
+                    }
                 }
+                Label lblnewPlaylist = new Label();
+                lblnewPlaylist.Text = "Naam nieuwe playlist:";
+                lblnewPlaylist.ID = "lblnewPlaylist";
+                tbPlaylistName.ID = "TbPlaylistName";
+                Button btnNewPlaylist= new Button();
+                btnNewPlaylist.Text = "Maak playlist";
+                btnNewPlaylist.ID = "BtnNewPlaylist";
+                btnNewPlaylist.Click += new EventHandler(BtnNewPlaylistClicked);
+                    PnlSearchResults.Controls.Add(lblnewPlaylist);
+                    PnlSearchResults.Controls.Add(tbPlaylistName);
+                    PnlSearchResults.Controls.Add(btnNewPlaylist);
+                    PnlSearchResults.Controls.Add(new LiteralControl("<br />"));
             }
             catch
             {
@@ -190,6 +209,24 @@ namespace Youtube
                 Response.Redirect(url);
             }
         }
+        protected void BtnNewPlaylistClicked(object sender, EventArgs e)
+        {
+            List<Playlist> playlistList = databaseManager.GetAllPlaylists();
+            int hightestPlaylistID = 0;
+            foreach (Playlist p in playlistList)
+            {
+                if (p.PlaylistID >= hightestPlaylistID)
+                {
+                    hightestPlaylistID = p.PlaylistID + 1;
+                }
+            }
+            if (tbPlaylistName.Text != string.Empty)
+            {
+            Playlist playlist = new Playlist(hightestPlaylistID,currentUser,tbPlaylistName.Text);
+            databaseManager.NewPlaylist(playlist);
+            Page.Response.Redirect(HttpContext.Current.Request.Url.ToString(), true);
+            }
+        }
         protected void BtnPlaylistClicked(object sender, EventArgs e)
         {
             int playlistID = 0;
@@ -201,7 +238,6 @@ namespace Youtube
                 Response.Redirect(url);
             }
         }
-
         protected void BtnChoosePlaylistClicked(object sender, EventArgs e)
         {
             int playlistID = 0;
@@ -211,7 +247,18 @@ namespace Youtube
             int beginOfVideo = buttonID.IndexOf("Vid");
             int.TryParse(buttonID.Substring(4,buttonID.Length-3-beginOfVideo), out playlistID);
             int.TryParse(buttonID.Substring(beginOfVideo+3),out videoID);
-                databaseManager.AddVideoToPlaylist(playlistID,videoID);
+                if (databaseManager.AddVideoToPlaylist(playlistID,videoID))
+                {
+                    lblErrorMessages.Visible = true;
+                    lblErrorMessages.ForeColor = System.Drawing.Color.Black;
+                    lblErrorMessages.Text = "Video toegevoegd aan afspeellijst";
+                }
+                else
+                {
+                    lblErrorMessages.Visible = false;
+                    lblErrorMessages.ForeColor = System.Drawing.Color.Red;
+                    lblErrorMessages.Text = "Video niet toegevoegd aan afspeellijst";
+                }
         }
         protected void BtnUpload_Click(object sender, EventArgs e)
         {

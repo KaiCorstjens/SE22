@@ -1,0 +1,9 @@
+C:\Users\Kai\Dropbox\School\P4\Software\Projects\Individuele Opdracht\Youtube\DataAccess\bin\DataAccess.dll.config
+C:\Users\Kai\Dropbox\School\P4\Software\Projects\Individuele Opdracht\Youtube\DataAccess\bin\DataAccess.dll
+C:\Users\Kai\Dropbox\School\P4\Software\Projects\Individuele Opdracht\Youtube\DataAccess\bin\DataAccess.pdb
+C:\Users\Kai\Dropbox\School\P4\Software\Projects\Individuele Opdracht\Youtube\DataAccess\bin\Oracle.DataAccess.dll
+C:\Users\Kai\Dropbox\School\P4\Software\Projects\Individuele Opdracht\Youtube\DataAccess\bin\ServiceLayer.dll
+C:\Users\Kai\Dropbox\School\P4\Software\Projects\Individuele Opdracht\Youtube\DataAccess\bin\ServiceLayer.pdb
+C:\Users\Kai\Dropbox\School\P4\Software\Projects\Individuele Opdracht\Youtube\DataAccess\obj\Release\DataAccess.csprojResolveAssemblyReference.cache
+C:\Users\Kai\Dropbox\School\P4\Software\Projects\Individuele Opdracht\Youtube\DataAccess\obj\Release\DataAccess.dll
+C:\Users\Kai\Dropbox\School\P4\Software\Projects\Individuele Opdracht\Youtube\DataAccess\obj\Release\DataAccess.pdb

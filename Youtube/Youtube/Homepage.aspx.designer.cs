@@ -256,6 +256,15 @@ namespace Youtube {
         protected global::System.Web.UI.WebControls.Label lblCommentInfo;
         
         /// <summary>
+        /// GridView control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView GridView;
+        
+        /// <summary>
         /// PnlComments control.
         /// </summary>
         /// <remarks>

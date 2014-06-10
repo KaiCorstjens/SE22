@@ -13,6 +13,9 @@ namespace Youtube
     using System.Web.UI.HtmlControls; 
     using System.IO;
     using System.Drawing;
+    using Youtube;
+    using Youtube.DataAccess;
+    using Youtube.ServiceLayer;
 
     public partial class Homepage : System.Web.UI.Page
     {
@@ -177,6 +180,16 @@ namespace Youtube
             if (CurrentVideo != null)
             {
                 Comments = databaseManager.GetComments(CurrentVideo);
+                List<PlainComment> pCList = new List<PlainComment>();
+                foreach (Comment c in Comments)
+                {
+                    PlainComment pC = new PlainComment(c);
+                    pCList.Add(pC);
+                }
+                GridView.DataSource = pCList;
+                GridView.DataBind();
+                /* Unnecessary because of gridview.
+                 * 
                 foreach (Comment c in Comments)
                 {
                     Label lblComment = new Label();
@@ -194,14 +207,16 @@ namespace Youtube
                     btnDeleteComment.Click += new EventHandler(DeleteComment);
                     if (CurrentUser != null && c != null)
                     {
-                        if (CurrentUser.Username == c.Poster.Username)
+                        if (CurrentUser.Username == c.Poster.Username || CurrentUser.Username == CurrentVideo.Uploader)
                         {
                             PnlComments.Controls.Add(btnDeleteComment);
                         }
                     }
                     PnlComments.Controls.Add(new LiteralControl("<br />"));
                 }
+                 */
             }
+                 
         }
         protected void DeleteComment(object sender, EventArgs e)
         {
@@ -324,23 +339,38 @@ namespace Youtube
                     lblErrorMessages.Text = "Video niet verwijderd";
                 }
             }
+            Page.Response.Redirect(HttpContext.Current.Request.Url.ToString(), true);
         }
-
         protected void BtnLogout_Click(object sender, EventArgs e)
         {
             LogOut();
         }
-
         protected void BtnPlaylists_Click(object sender, EventArgs e)
         {
             string url = "SearchResults.aspx?playlistUser=" + CurrentUser.Username;
             Response.Redirect(url);
         }
-
         protected void BtnAddtoPlaylist_Click(object sender, EventArgs e)
         {
             string url = "SearchResults.aspx?ChooseplaylistUser=" + CurrentUser.Username+"&video="+CurrentVideo.VideoID;
             Response.Redirect(url);
+        }
+        protected void GridView_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+
+            string currentCommand = e.CommandName;
+            int currentRowIndex = int.Parse(e.CommandArgument.ToString());
+
+            Comment[] comments = Comments.ToArray();
+
+            Comment comment = comments[currentRowIndex];
+
+            databaseManager.DeleteComment(comment.CommentID);
+            AddComments();
+            
+            /* Label1.Text = "Command: " + currentCommand;
+             Label2.Text = "Row Index: " + currentRowIndex.ToString;
+             Label3.Text = "Product ID: " + ProductID; */
         }
     }
 }
