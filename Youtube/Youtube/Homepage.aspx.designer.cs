@@ -49,6 +49,15 @@ namespace Youtube {
         protected global::System.Web.UI.WebControls.Button BtnUpload;
         
         /// <summary>
+        /// BtnPlaylists control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button BtnPlaylists;
+        
+        /// <summary>
         /// lblUserloginName control.
         /// </summary>
         /// <remarks>

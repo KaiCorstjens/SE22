@@ -14,27 +14,102 @@ namespace Youtube
     {
         private List<Video> videos;
         private List<Video> selectedVideos;
+        private List<Playlist> playlists;
         private DatabaseManager databaseManager = new DatabaseManager();
-        private string search; 
+        private string search;
+        private int playlistID;
         private User currentUser;
         protected void Page_Load(object sender, EventArgs e)
         {
-            search = Request.QueryString["search"].Replace("+"," ");
-            if (tbSearchBar.Text == string.Empty)
-            {
-                tbSearchBar.Text = search;
-            }
-            videos = databaseManager.GetAllVideos();
             selectedVideos = new List<Video>();
-            foreach (Video v in videos)
+            playlistID = 0;
+            try
             {
-                if (!v.Private)
+                string playlistUser = Request.QueryString["playlistUser"];
+                if (playlistUser != string.Empty)
                 {
-                    if (v.Title.ToLower().Contains(search))
+                    playlists = databaseManager.GetPlaylists(playlistUser);
+                    foreach (Playlist p in playlists)
                     {
-                        selectedVideos.Add(v);
+                        Label myLabel = new Label();
+                        myLabel.Text = p.Name;
+                        myLabel.ID = "Label" + p.PlaylistID;
+                        Button myButton = new Button();
+                        myButton.Text = "Bekijken";
+                        myButton.ID = "Button" + p.PlaylistID;
+                        myButton.Click += new EventHandler(BtnPlaylistClicked);
+                        PnlSearchResults.Controls.Add(myLabel);
+                        PnlSearchResults.Controls.Add(myButton);
+                        PnlSearchResults.Controls.Add(new LiteralControl("<br />"));
                     }
                 }
+
+            }
+            catch
+            {
+                // No playlist, possibly search
+            }
+            try
+            {
+                int.TryParse(Request.QueryString["playlistID"], out playlistID);
+                if (playlistID != 0)
+                {
+                    selectedVideos = databaseManager.GetVideoFromPlaylist(playlistID);
+                }
+
+                foreach (Video v in selectedVideos)
+                {
+                    Label myLabel = new Label();
+                    myLabel.Text = v.Title;
+                    myLabel.ID = "Label" + v.VideoID;
+                    Button myButton = new Button();
+                    myButton.Text = "Bekijken";
+                    myButton.ID = "Button" + v.VideoID;
+                    myButton.Click += new EventHandler(BtnClicked);
+                    PnlSearchResults.Controls.Add(myLabel);
+                    PnlSearchResults.Controls.Add(myButton);
+                    PnlSearchResults.Controls.Add(new LiteralControl("<br />"));
+                }
+            }
+            catch
+            {
+                // No playlist, possibly search
+            }
+            try
+            {
+                search = Request.QueryString["search"].Replace("+", " ");
+                if (tbSearchBar.Text == string.Empty)
+                {
+                    tbSearchBar.Text = search;
+                }
+                videos = databaseManager.GetAllVideos();
+                foreach (Video v in videos)
+                {
+                    if (!v.Private)
+                    {
+                        if (v.Title.ToLower().Contains(search))
+                        {
+                            selectedVideos.Add(v);
+                        }
+                    }
+                }
+                foreach (Video v in selectedVideos)
+                {
+                    Label myLabel = new Label();
+                    myLabel.Text = v.Title;
+                    myLabel.ID = "Label" + v.VideoID;
+                    Button myButton = new Button();
+                    myButton.Text = "Bekijken";
+                    myButton.ID = "Button" + v.VideoID;
+                    myButton.Click += new EventHandler(BtnClicked);
+                    PnlSearchResults.Controls.Add(myLabel);
+                    PnlSearchResults.Controls.Add(myButton);
+                    PnlSearchResults.Controls.Add(new LiteralControl("<br />"));
+                }
+            }
+            catch
+            {
+                // No search, possibly playlist
             }
             try
             {
@@ -48,19 +123,6 @@ namespace Youtube
             catch
             {
 
-            }
-            foreach (Video v in selectedVideos)
-            {
-                Label myLabel = new Label();
-                myLabel.Text = v.Title;
-                myLabel.ID = "Label" + v.VideoID;
-                Button myButton = new Button();
-                myButton.Text = "Bekijken";
-                myButton.ID = "Button" + v.VideoID;
-                myButton.Click += new EventHandler(BtnClicked);
-                PnlSearchResults.Controls.Add(myLabel);
-                PnlSearchResults.Controls.Add(myButton);
-                PnlSearchResults.Controls.Add(new LiteralControl("<br />"));
             }
         }
         public void Login(User loginUser)
@@ -94,6 +156,17 @@ namespace Youtube
             if (int.TryParse(clickedButton.ID.Substring(6), out videoID))
             {
                 string url = "Homepage.aspx?video=" + videoID;
+                Response.Redirect(url);
+            }
+        }
+        protected void BtnPlaylistClicked(object sender, EventArgs e)
+        {
+            int playlistID = 0;
+            Button clickedButton = (Button)sender;
+            string plID = clickedButton.ID.ToString();
+            if (int.TryParse(clickedButton.ID.Substring(6), out playlistID))
+            {
+                string url = "SearchResults.aspx?PlaylistID=" + playlistID;
                 Response.Redirect(url);
             }
         }
@@ -157,6 +230,12 @@ namespace Youtube
                 string url = "SearchREsults.aspx?search=" + search;
                 Response.Redirect(url);
             }
+        }
+
+        protected void BtnHomepage_Click(object sender, EventArgs e)
+        {
+            string url = "Homepage.aspx";
+            Response.Redirect(url);
         }
     }
 }

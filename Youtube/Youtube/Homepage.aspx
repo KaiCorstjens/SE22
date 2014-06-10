@@ -11,7 +11,8 @@
         <div>
             <asp:TextBox ID="tbSearchBar" runat="server" Width="881px"></asp:TextBox>
             <asp:Button ID="BtnSearch" runat="server" Text="Search" OnClick="BtnSearch_Click" />
-            <asp:Button ID="BtnUpload" runat="server" OnClick="BtnUpload_Click" Text="Upload" />
+            <asp:Button ID="BtnUpload" runat="server" OnClick="BtnUpload_Click" Text="Upload" Visible="False" />
+            <asp:Button ID="BtnPlaylists" runat="server" OnClick="BtnPlaylists_Click" Text="Playlists" Visible="False" />
             <br />
             <asp:Label ID="lblUserloginName" runat="server" Text="Username"></asp:Label>
             <asp:TextBox ID="tbLoginUsername" runat="server"></asp:TextBox>

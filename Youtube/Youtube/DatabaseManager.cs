@@ -162,6 +162,99 @@ namespace Youtube
         {
             return true;
         }
+        public List<Playlist> GetPlaylists (string username)
+        {
+            List<Playlist> PlaylistList = new List<Playlist>();
+            if (connection.State != ConnectionState.Open)
+            {
+                connection.Open();
+            }
+            string query = "SELECT afspeellijstID,NAAM FROM SE_Afspeellijst WHERE gebruikersnaam = '"+username+"'";
+
+            OracleCommand command = new OracleCommand(query, connection);
+            command.CommandType = CommandType.Text;
+            OracleDataReader dataReader;
+            int playlistID = 0;
+            string name = string.Empty;
+            try
+            {
+                dataReader = command.ExecuteReader();
+                while (dataReader.Read())
+                {
+                    playlistID = Convert.ToInt32(dataReader["AFSPEELLIJSTID"]);
+                    name = Convert.ToString(dataReader["NAAM"]);
+                    Playlist playlist = new Playlist(playlistID,GetUser(username),name);
+                    PlaylistList.Add(playlist);
+                }
+                
+            }
+            catch
+            {
+                // Catch if reading from the database doesn't work
+            }
+            connection.Close();
+            return PlaylistList;
+        }
+
+        public List<Video> GetVideoFromPlaylist(int playlistId)
+        {
+            List<Video> videoList = new List<Video>();
+            if (connection.State != ConnectionState.Open)
+            {
+                connection.Open();
+            }
+            string query = "SELECT v.videoID,v.Titel,v.UPloader,v.Beschrijving,v.keerbekeken,v.datum,v.likes,v.dislikes,v.prive FROM SE_VIDEO v,SE_AFSPEELLIJST afsplt,SE_VIDEOPERAFSPEELLIJST vpal WHERE v.videoID = vpal.videoID AND afsplt.afspeellijstid = "+playlistId;
+            OracleCommand command = new OracleCommand(query, connection);
+            command.CommandType = CommandType.Text;
+            OracleDataReader dataReader;
+            int videoId = 0;
+            string title = string.Empty;
+            string uploader = string.Empty;
+            string description = string.Empty;
+            int views = 0;
+            string uploadDate = string.Empty;
+            int likes = 0;
+            int disLikes = 0;
+            int isPrivate = 0;
+            bool isPrivateBool = false;
+            List<Comment> comments = new List<Comment>();
+            string location = string.Empty;
+            try
+            {
+                dataReader = command.ExecuteReader();
+                while (dataReader.Read())
+                {
+                    videoId = Convert.ToInt32(dataReader["VIDEOID"]);
+                    title = Convert.ToString(dataReader["TITEL"]);
+                    uploader = Convert.ToString(dataReader["UPLOADER"]);
+                    description = Convert.ToString(dataReader["BESCHRIJVING"]);
+                    views = Convert.ToInt32(dataReader["KEERBEKEKEN"]);
+                    uploadDate = Convert.ToString(dataReader["DATUM"]);
+                    likes = Convert.ToInt32(dataReader["LIKES"]);
+                    disLikes = Convert.ToInt32(dataReader["DISLIKES"]);
+                    isPrivate = Convert.ToInt32(dataReader["PRIVE"]);
+                    //location = Convert.ToString(dataReader["FILENAME"]);
+                    //Comments
+                    //location = Convert.ToString(dataReader["FILENAME"]);
+                    if (isPrivate == 1)
+                    {
+                        isPrivateBool = true;
+                    }
+                    else if (isPrivate == 0)
+                    {
+                        isPrivateBool = false;
+                    }
+                    Video video = new Video(videoId, title, uploader, description, views, likes, disLikes, isPrivateBool, location);
+                    videoList.Add(video);
+                }
+            }
+            catch
+            {
+                // Catch if reading from the database doesn't work
+            }
+            connection.Close();
+            return videoList;
+        }
         public List<Video> GetAllVideos()
         {
             List<Video> videoList = new List<Video>();
@@ -199,7 +292,7 @@ namespace Youtube
                         likes = Convert.ToInt32(dataReader["LIKES"]);
                         disLikes = Convert.ToInt32(dataReader["DISLIKES"]);
                         isPrivate = Convert.ToInt32(dataReader["PRIVE"]);
-                        location = Convert.ToString(dataReader["FILENAME"]);
+                        //location = Convert.ToString(dataReader["FILENAME"]);
                         //Comments
                         //location = Convert.ToString(dataReader["FILENAME"]);
                         if (isPrivate == 1)

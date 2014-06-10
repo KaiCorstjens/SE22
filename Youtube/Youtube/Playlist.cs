@@ -10,12 +10,16 @@ using System.Web;
 
     public class Playlist
     {
+        public int PlaylistID { get; set; }
         public User User { get; set; }
         public List<Video> Videos { get; set; }
+        public string Name { get; set; }
 
-        public Playlist(User user)
+        public Playlist(int PlaylistID, User user,string name)
         {
+            this.PlaylistID = PlaylistID;
             this.User = user;
+            this.Name = name;
             Videos = new List<Video>();
         }
         public bool AddVideo(Video video)

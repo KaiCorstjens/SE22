@@ -118,6 +118,8 @@ namespace Youtube
                 tbAddComment.Visible = true;
                 BtnAddComment.Visible = true;
                 lblCommentInfo.Visible = false;
+                BtnPlaylists.Visible = true;
+                BtnUpload.Visible = true;
                 lblErrorMessages.Visible = true;
                 BtnLogout.Visible = true;
                 lblErrorMessages.ForeColor = System.Drawing.Color.Black;
@@ -156,6 +158,8 @@ namespace Youtube
             tbAddComment.Visible = false;
             BtnAddComment.Visible = false;
             lblCommentInfo.Visible = true;
+            BtnPlaylists.Visible = false;
+            BtnUpload.Visible = false;
             lblErrorMessages.Visible = true;
             lblErrorMessages.ForeColor = System.Drawing.Color.Black;
             lblErrorMessages.Text = "Succesvol uitgelogd.";
@@ -223,17 +227,8 @@ namespace Youtube
         }
         protected void BtnUpload_Click(object sender, EventArgs e)
         {
-            if (CurrentUser != null)
-            {
                 string url = "Upload.aspx";
                 Response.Redirect(url);
-            }
-            else
-            {
-                lblErrorMessages.Visible = true;
-                lblErrorMessages.ForeColor = System.Drawing.Color.Red;
-                lblErrorMessages.Text = "Je moet ingelogd zijn om video's te uploaden.";
-            }
         }
         protected void BtnLikes_Click(object sender, EventArgs e)
         {
@@ -332,6 +327,12 @@ namespace Youtube
         protected void BtnLogout_Click(object sender, EventArgs e)
         {
             LogOut();
+        }
+
+        protected void BtnPlaylists_Click(object sender, EventArgs e)
+        {
+            string url = "SearchREsults.aspx?playlistUser=" + CurrentUser.Username;
+            Response.Redirect(url);
         }
     }
 }
